@@ -1,10 +1,13 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:thesession/pages/api_results_pages/tunes_popular_page.dart';
 import 'package:thesession/pages/api_results_pages/tunes_recording_page.dart';
+import 'package:thesession/pages/search_page.dart';
+import 'package:thesession/widgets%20/side_drawer.dart';
 import 'api_results_pages/tunes_new_page.dart';
 
 class ExplorePage extends StatefulWidget {
@@ -22,8 +25,10 @@ class _ExplorePageState extends State<ExplorePage> {
   };
   final List<String> _items = ['New', 'Popular', 'Recordings'];
   final _pages = [NewTunesPage(), PopularTunesPage(), RecordingTunesPage()];
+  final user = FirebaseAuth.instance.currentUser;
 
   int selectedIndex = 0;
+  bool _isSearching = false;
   StatefulWidget curPage = new NewTunesPage();
 
   String selectedItem = "New";
@@ -31,6 +36,8 @@ class _ExplorePageState extends State<ExplorePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        titleSpacing: 0,
+        backgroundColor: Colors.grey[400],
         centerTitle: false,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -98,14 +105,27 @@ class _ExplorePageState extends State<ExplorePage> {
                 offset: const Offset(0, -2),
               ),
             ),
-            Icon(CupertinoIcons.search)
+            GestureDetector(
+                onTap: () => {_navigateToNextScreen(context)},
+                child: Icon(CupertinoIcons.search)),
           ],
         ),
       ),
-      body: IndexedStack(
-        index: selectedIndex,
-        children: _pages,
+      drawer: SideDrawer(userName: user?.email),
+      body: GestureDetector(
+        onTap: () {
+          FocusScope.of(context).requestFocus(new FocusNode());
+        },
+        child: IndexedStack(
+          index: selectedIndex,
+          children: _pages,
+        ),
       ),
     );
+  }
+
+  void _navigateToNextScreen(BuildContext context) {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => SearchPage()));
   }
 }

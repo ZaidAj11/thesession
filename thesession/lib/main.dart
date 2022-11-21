@@ -1,11 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:thesession/auth/main_page.dart';
+import 'dart:io' show Platform;
+import 'package:flutter/foundation.dart';
 
 void main() async {
+  _setTargetPlatformForDesktop();
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(const MyApp());
+}
+
+void _setTargetPlatformForDesktop() {
+  TargetPlatform targetPlatform;
+  if (Platform.isMacOS) {
+    targetPlatform = TargetPlatform.iOS;
+  } else if (Platform.isLinux || Platform.isWindows) {
+    targetPlatform = TargetPlatform.android;
+  }
 }
 
 class MyApp extends StatelessWidget {

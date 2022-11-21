@@ -17,7 +17,7 @@ class _LoginPageState extends State<LoginPage> {
 
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-
+  late FocusNode _focusNode = new FocusNode();
   Future signIn() async {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
@@ -44,6 +44,7 @@ class _LoginPageState extends State<LoginPage> {
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
+    _focusNode.dispose();
     super.dispose();
   }
 
@@ -89,6 +90,7 @@ class _LoginPageState extends State<LoginPage> {
                       child: Padding(
                         padding: const EdgeInsets.fromLTRB(8.0, 0, 0, 0),
                         child: TextField(
+                          onSubmitted: ((value) => {_focusNode.requestFocus()}),
                           controller: _emailController,
                           decoration: InputDecoration(
                             border: InputBorder.none,
@@ -112,6 +114,7 @@ class _LoginPageState extends State<LoginPage> {
                       child: Padding(
                         padding: const EdgeInsets.fromLTRB(8.0, 0, 0, 0),
                         child: TextField(
+                          focusNode: _focusNode,
                           controller: _passwordController,
                           obscureText: true,
                           decoration: InputDecoration(
