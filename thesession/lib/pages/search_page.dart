@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:thesession/http_requests/tunes/searchResult.dart';
+import 'package:http/http.dart' as http;
 
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
@@ -10,6 +12,25 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> {
   final _searchController = TextEditingController();
+  String query = "";
+  List<TuneFromSearchResult> searchResults = [];
+
+  Future<bool> GetData() async {
+    query = _searchController.text.replaceAll(' ', '%');
+    Uri uri = Uri.parse(
+        "https://thesession.org/tunes/search?q=${query}?&format=json");
+    final response = await http.get(uri);
+
+    if (response.statusCode == 200) {
+      final result = searchResultTuneFromJson(response.body);
+      searchResults.clear();
+      searchResults.addAll(result.tunes);
+      setState(() {});
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +52,7 @@ class _SearchPageState extends State<SearchPage> {
                       ),
                       child: TextField(
                         textInputAction: TextInputAction.search,
-                        onSubmitted: (String val) => {print("Searched!")},
+                        onSubmitted: (String val) => {GetData()},
                         autofocus: true,
                         controller: _searchController,
                         decoration: InputDecoration(
@@ -58,7 +79,21 @@ class _SearchPageState extends State<SearchPage> {
                   ),
                 ),
               ],
-            )
+            ),
+            Expanded(
+              child: ListView.separated(
+                itemBuilder: (context, index) {
+                  final searchResult = searchResults[index];
+                  return ListTile(
+                    title: Text(searchResult.name.toString()),
+                    subtitle: Text("By ${searchResult.member.name}"),
+                    trailing: Text(searchResult.date.toString()),
+                  );
+                },
+                separatorBuilder: (context, index) => Divider(),
+                itemCount: searchResults.length,
+              ),
+            ),
           ],
         ),
       ),

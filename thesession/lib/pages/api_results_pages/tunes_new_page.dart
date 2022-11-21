@@ -52,35 +52,36 @@ class _NewTunesPageState extends State<NewTunesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SmartRefresher(
-          enablePullUp: true,
-          controller: refreshController,
-          onRefresh: () async {
-            final result = await GetData(isRefresh: true);
-            if (result) {
-              refreshController.refreshCompleted();
-            } else {
-              refreshController.refreshFailed();
-            }
-          },
-          onLoading: () async {
-            final result = await GetData();
-            if (result) {
-              refreshController.loadComplete();
-            } else {
-              refreshController.loadFailed();
-            }
-          },
-          child: ListView.separated(
-              itemBuilder: (context, index) {
-                final newTune = newTunes[index];
-                return ListTile(
-                  title: Text(newTune.tune.name.toString()),
-                  subtitle: Text("By ${newTune.member.name}"),
-                  trailing: Text(newTune.date.toString()),
-                );
-              },
-              separatorBuilder: (context, index) => Divider(),
-              itemCount: newTunes.length)),
+        enablePullUp: true,
+        controller: refreshController,
+        onRefresh: () async {
+          final result = await GetData(isRefresh: true);
+          if (result) {
+            refreshController.refreshCompleted();
+          } else {
+            refreshController.refreshFailed();
+          }
+        },
+        onLoading: () async {
+          final result = await GetData();
+          if (result) {
+            refreshController.loadComplete();
+          } else {
+            refreshController.loadFailed();
+          }
+        },
+        child: ListView.separated(
+            itemBuilder: (context, index) {
+              final newTune = newTunes[index];
+              return ListTile(
+                title: Text(newTune.tune.name.toString()),
+                subtitle: Text("By ${newTune.member.name}"),
+                trailing: Text(newTune.date.toString()),
+              );
+            },
+            separatorBuilder: (context, index) => Divider(),
+            itemCount: newTunes.length),
+      ),
     );
   }
 }
