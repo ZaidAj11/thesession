@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:thesession/http_requests/tunes/searchResult.dart';
+import 'package:thesession/models/tunes/searchResult.dart';
 import 'package:http/http.dart' as http;
 
 class SearchPage extends StatefulWidget {

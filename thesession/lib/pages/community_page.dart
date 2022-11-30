@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sheet_music/sheet_music.dart';
 
 class CommunityPage extends StatefulWidget {
   const CommunityPage({Key? key}) : super(key: key);
@@ -22,11 +21,6 @@ class _CommunityPageState extends State<CommunityPage> {
             ),
             Container(
               color: Colors.blue,
-              child: SheetMusic(
-                trebleClef: true,
-                scale: 'Edorian',
-                pitch: '',
-              ),
             ),
           ],
         ),

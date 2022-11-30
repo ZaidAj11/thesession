@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:http/http.dart' as http;
-import 'package:thesession/http_requests/tunes/popularTune.dart';
-import 'package:thesession/http_requests/tunes/recordingTune.dart';
+import 'package:thesession/models/tunes/popularTune.dart';
+import 'package:thesession/models/tunes/recordingTune.dart';
 import 'package:thesession/main.dart';
-import '../../http_requests/tunes/newTune.dart';
+import '../../models/tunes/newTune.dart';
 
 class RecordingTunesPage extends StatefulWidget {
   const RecordingTunesPage({Key? key}) : super(key: key);
