@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -12,6 +13,9 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  final _displayNameController = TextEditingController();
+  final _firstNameController = TextEditingController();
+  final _surnameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
@@ -24,6 +28,11 @@ class _RegisterPageState extends State<RegisterPage> {
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
             email: _emailController.text.trim(),
             password: _passwordController.text.trim());
+        addUserDetails(
+            _firstNameController.text.trim(),
+            _surnameController.text.trim(),
+            _emailController.text.trim(),
+            _displayNameController.text.trim());
       } catch (exception) {
         _emailController.clear();
         _passwordController.clear();
@@ -34,6 +43,16 @@ class _RegisterPageState extends State<RegisterPage> {
     } else {
       showSnackBar(context, "Passwords to do not match...");
     }
+  }
+
+  Future addUserDetails(String firstName, String lastName, String email,
+      String displayName) async {
+    await FirebaseFirestore.instance.collection('users').add({
+      'first name': firstName,
+      'last name': lastName,
+      'email': email,
+      'age': displayName,
+    });
   }
 
   void showSnackBar(BuildContext context, String text) {
@@ -75,6 +94,81 @@ class _RegisterPageState extends State<RegisterPage> {
 
                 SizedBox(height: 20),
 
+                // Display Name
+
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.grey[200],
+                      border: Border.all(color: Colors.white),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(8.0, 0, 0, 0),
+                      child: TextField(
+                        controller: _displayNameController,
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintText: 'Display Name',
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+
+                SizedBox(height: 20),
+
+                // First Name
+
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.grey[200],
+                      border: Border.all(color: Colors.white),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(8.0, 0, 0, 0),
+                      child: TextField(
+                        controller: _firstNameController,
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintText: 'First Name',
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+
+                SizedBox(height: 20),
+
+                // Surname
+
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.grey[200],
+                      border: Border.all(color: Colors.white),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(8.0, 0, 0, 0),
+                      child: TextField(
+                        controller: _surnameController,
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintText: 'Surname',
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+
+                SizedBox(height: 20),
+
                 // Input boxes for email/password
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
@@ -93,7 +187,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             hintText: 'Email',
                           ),
                         ),
-                      )), // Container
+                      )),
                 ),
 
                 SizedBox(height: 20),
