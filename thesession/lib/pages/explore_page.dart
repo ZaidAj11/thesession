@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:thesession/main.dart';
 import 'package:thesession/pages/api_results_pages/tunes_popular_page.dart';
 import 'package:thesession/pages/api_results_pages/tunes_recording_page.dart';
 import 'package:thesession/pages/search_page.dart';
@@ -37,7 +38,7 @@ class _ExplorePageState extends State<ExplorePage> {
     return Scaffold(
       appBar: AppBar(
         titleSpacing: 0,
-        backgroundColor: Colors.grey[400],
+        backgroundColor: AppColours.DefaultColour,
         centerTitle: false,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -105,9 +106,12 @@ class _ExplorePageState extends State<ExplorePage> {
                 offset: const Offset(0, -2),
               ),
             ),
-            GestureDetector(
-                onTap: () => {_navigateToNextScreen(context)},
-                child: Icon(CupertinoIcons.search)),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+              child: GestureDetector(
+                  onTap: () => {_navigateToNextScreen(context)},
+                  child: Icon(CupertinoIcons.search)),
+            ),
           ],
         ),
       ),

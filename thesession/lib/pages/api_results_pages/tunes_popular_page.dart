@@ -3,6 +3,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:http/http.dart' as http;
 import 'package:thesession/models/tunes/popularTune.dart';
 import 'package:thesession/main.dart';
+import 'package:thesession/pages/tune_info_page.dart';
 import '../../models/tunes/newTune.dart';
 
 class PopularTunesPage extends StatefulWidget {
@@ -106,7 +107,7 @@ class _PopularTunesPageState extends State<PopularTunesPage> {
                     ],
                   ),
                   onTap: () {
-                    print("Pressed entry $index");
+                    _navigateToPost(context, index);
                   },
                 ),
                 margin: EdgeInsets.all(0),
@@ -118,6 +119,19 @@ class _PopularTunesPageState extends State<PopularTunesPage> {
                   height: 1,
                 ),
             itemCount: popularTunes.length),
+      ),
+    );
+  }
+
+  void _navigateToPost(BuildContext context, int indexOfItem) {
+    var item = popularTunes[indexOfItem];
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => TuneInfoPage(
+          tuneId: item.id.toString(),
+          settingId: '',
+          isNewTune: false,
+        ),
       ),
     );
   }

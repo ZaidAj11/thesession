@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:http/http.dart' as http;
-import '../../http_requests/tunes/newTune.dart';
+import '../../models/tunes/newTune.dart';
+import 'package:thesession/pages/tune_info_page.dart';
 
 class NewTunesPage extends StatefulWidget {
   const NewTunesPage({Key? key}) : super(key: key);
@@ -73,14 +74,30 @@ class _NewTunesPageState extends State<NewTunesPage> {
         child: ListView.separated(
             itemBuilder: (context, index) {
               final newTune = newTunes[index];
-              return ListTile(
-                title: Text(newTune.tune.name.toString()),
-                subtitle: Text("By ${newTune.member.name}"),
-                trailing: Text(newTune.date.toString()),
+              return GestureDetector(
+                child: ListTile(
+                  title: Text(newTune.tune.name.toString()),
+                  subtitle: Text("By ${newTune.member.name}"),
+                  trailing: Text(newTune.date.toString()),
+                ),
+                onTap: () => {_navigateToPost(context, index)},
               );
             },
             separatorBuilder: (context, index) => Divider(),
             itemCount: newTunes.length),
+      ),
+    );
+  }
+
+  void _navigateToPost(BuildContext context, int indexOfItem) {
+    var item = newTunes[indexOfItem];
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => TuneInfoPage(
+          tuneId: item.tune.id.toString(),
+          settingId: item.id.toString(),
+          isNewTune: true,
+        ),
       ),
     );
   }
