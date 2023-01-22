@@ -49,25 +49,20 @@ class SideDrawer extends StatelessWidget {
                             Divider(
                               thickness: 2,
                             ),
+                            DrawerItem(
+                              doSomething: () => {},
+                              content: 'Data Analytics',
+                              trailingIcon: Icon(Icons.auto_graph),
+                            ),
                           ],
                         ),
                         Expanded(
-                          child: Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                GestureDetector(
-                                  onTap: signOut,
-                                  child: ListTile(
-                                    trailing: Icon(Icons.exit_to_app),
-                                    title: Text('Sign out'),
-                                  ),
-                                )
-                              ],
-                            ),
+                          child: DrawerItem(
+                            doSomething: signOut,
+                            content: 'Sign out',
+                            trailingIcon: Icon(Icons.exit_to_app),
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),
@@ -76,6 +71,37 @@ class SideDrawer extends StatelessWidget {
             ),
           );
         },
+      ),
+    );
+  }
+}
+
+class DrawerItem extends StatelessWidget {
+  final VoidCallback doSomething;
+  final String content;
+  final Icon trailingIcon;
+  const DrawerItem(
+      {Key? key,
+      required this.doSomething,
+      required this.content,
+      required this.trailingIcon})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: Alignment.bottomLeft,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          GestureDetector(
+            onTap: doSomething,
+            child: ListTile(
+              trailing: trailingIcon,
+              title: Text(content),
+            ),
+          )
+        ],
       ),
     );
   }
