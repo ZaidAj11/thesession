@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:thesession/models/tunes/popularTune.dart';
 import 'package:thesession/models/tunes/recordingTune.dart';
 import 'package:thesession/main.dart';
-import 'package:thesession/pages/tune_info_page.dart';
+import 'package:thesession/pages/api_results_pages/tune_info_page.dart';
 import '../../models/tunes/newTune.dart';
 
 class RecordingTunesPage extends StatefulWidget {
@@ -100,7 +100,6 @@ class _RecordingTunesPageState extends State<RecordingTunesPage> {
                             padding: const EdgeInsets.fromLTRB(0, 0, 15, 0),
                             child: Text(
                               'Share',
-                              style: TextStyle(color: AppColours.DefaultColour),
                             ),
                           )
                         ],

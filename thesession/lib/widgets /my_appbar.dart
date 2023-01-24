@@ -19,8 +19,9 @@ class _MyAppBarState extends State<MyAppBar> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      elevation: 0,
       titleSpacing: 0,
-      backgroundColor: AppColours.DefaultColour,
+      backgroundColor: AppColours.DefaultDarkColour,
       centerTitle: false,
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

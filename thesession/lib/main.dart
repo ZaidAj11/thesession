@@ -30,17 +30,20 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'theSession',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        scaffoldBackgroundColor: Colors.white,
-        textTheme: GoogleFonts.manropeTextTheme(
-          Theme.of(context).textTheme,
-        ),
+        primarySwatch: Colors.grey,
+        brightness: Brightness.dark,
       ),
+      darkTheme: ThemeData(textTheme: GoogleFonts.manropeTextTheme()),
       home: const MainPage(),
     );
+  }
+
+  static bool checkIfDarkModeEnabled(context) {
+    return Theme.of(context).brightness == Brightness.dark;
   }
 }
 
 class AppColours {
-  static final Color DefaultColour = Color.fromARGB(255, 47, 47, 47);
+  static final Color DefaultDarkColour = Color.fromARGB(255, 47, 47, 47);
+  static final Color DefaultWhiteColour = Color.fromARGB(255, 218, 218, 218);
 }

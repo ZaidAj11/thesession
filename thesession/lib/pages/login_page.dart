@@ -51,7 +51,6 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Center(
@@ -92,7 +91,6 @@ class _LoginPageState extends State<LoginPage> {
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: Container(
                       decoration: BoxDecoration(
-                        color: Colors.grey[200],
                         border: Border.all(color: Colors.white),
                         borderRadius: BorderRadius.circular(12),
                       ),
@@ -116,7 +114,6 @@ class _LoginPageState extends State<LoginPage> {
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Colors.grey[200],
                       border: Border.all(color: Colors.white),
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -146,13 +143,15 @@ class _LoginPageState extends State<LoginPage> {
                     child: Container(
                       padding: const EdgeInsets.all(15),
                       decoration: BoxDecoration(
-                        color: AppColours.DefaultColour,
+                        color: MyApp.checkIfDarkModeEnabled(context)
+                            ? AppColours.DefaultDarkColour
+                            : AppColours.DefaultDarkColour,
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Center(
                         child: Text(
                           "Sign in",
-                          style: TextStyle(color: Colors.white, fontSize: 20),
+                          style: TextStyle(fontSize: 20),
                         ),
                       ),
                     ),

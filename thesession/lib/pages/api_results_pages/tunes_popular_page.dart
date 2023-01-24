@@ -3,7 +3,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:http/http.dart' as http;
 import 'package:thesession/models/tunes/popularTune.dart';
 import 'package:thesession/main.dart';
-import 'package:thesession/pages/tune_info_page.dart';
+import 'package:thesession/pages/api_results_pages/tune_info_page.dart';
 import '../../models/tunes/newTune.dart';
 
 class PopularTunesPage extends StatefulWidget {
@@ -99,7 +99,6 @@ class _PopularTunesPageState extends State<PopularTunesPage> {
                             padding: const EdgeInsets.fromLTRB(0, 0, 15, 0),
                             child: Text(
                               'Share',
-                              style: TextStyle(color: AppColours.DefaultColour),
                             ),
                           )
                         ],

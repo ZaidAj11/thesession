@@ -44,11 +44,21 @@ class _HomePageState extends State<HomePage> {
         currentIndex: _selectedIndex,
         onTap: _navigateBottomBar,
         type: BottomNavigationBarType.fixed,
-        selectedItemColor: AppColours.DefaultColour,
+        elevation: 0,
+        selectedItemColor: Colors.grey[100],
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.explore), label: 'Explore'),
-          BottomNavigationBarItem(icon: Icon(Icons.people), label: 'Community'),
-          BottomNavigationBarItem(icon: Icon(Icons.newspaper), label: 'News'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.explore_outlined),
+              label: 'Explore',
+              activeIcon: Icon(Icons.explore)),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.people_outlined),
+              activeIcon: Icon(Icons.people),
+              label: 'Community'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.article_outlined),
+              activeIcon: Icon(Icons.article_outlined),
+              label: 'News'),
         ],
       ),
     );

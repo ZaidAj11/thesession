@@ -13,12 +13,10 @@ class SideDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: Colors.grey[300],
       child: LayoutBuilder(
         builder: (context, constraints) {
           return SingleChildScrollView(
             child: Container(
-              decoration: BoxDecoration(color: Colors.grey[200]),
               child: ConstrainedBox(
                 constraints: constraints.copyWith(
                   minHeight: constraints.maxHeight,

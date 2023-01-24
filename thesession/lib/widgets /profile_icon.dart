@@ -11,8 +11,8 @@ class ProfileIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 80,
-      height: 80,
+      width: 60,
+      height: 60,
       decoration: BoxDecoration(
         color: Color((rng.nextDouble() * 0xFFFFFF).toInt()).withOpacity(1.0),
         border: Border.all(color: Colors.white),
@@ -21,7 +21,7 @@ class ProfileIcon extends StatelessWidget {
       child: Center(
         child: Text(
           "Z.A",
-          style: TextStyle(fontSize: 36, color: Colors.white),
+          style: TextStyle(fontSize: 24, color: Colors.white),
         ),
       ),
     );

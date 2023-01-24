@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:http/http.dart' as http;
 import '../../models/tunes/newTune.dart';
-import 'package:thesession/pages/tune_info_page.dart';
+import 'package:thesession/pages/api_results_pages/tune_info_page.dart';
 
 class NewTunesPage extends StatefulWidget {
   const NewTunesPage({Key? key}) : super(key: key);

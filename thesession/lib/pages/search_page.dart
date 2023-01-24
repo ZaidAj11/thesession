@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:thesession/main.dart';
 import 'package:thesession/models/tunes/searchResult.dart';
 import 'package:http/http.dart' as http;
 
@@ -46,8 +47,9 @@ class _SearchPageState extends State<SearchPage> {
                     child: Container(
                       height: 40,
                       decoration: BoxDecoration(
-                        color: Colors.grey[200],
-                        border: Border.all(color: Colors.white),
+                        color: MyApp.checkIfDarkModeEnabled(context)
+                            ? Colors.grey[900]
+                            : Colors.grey[200],
                         borderRadius: BorderRadius.circular(5),
                       ),
                       child: TextField(
@@ -62,14 +64,16 @@ class _SearchPageState extends State<SearchPage> {
                             contentPadding: EdgeInsets.fromLTRB(-5, 0, 0, 10),
                             icon: Padding(
                               padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-                              child: Icon(CupertinoIcons.search),
+                              child: Icon(
+                                CupertinoIcons.search,
+                              ),
                             )),
                       ),
                     ),
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 0, 8, 0),
+                  padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
                   child: GestureDetector(
                     onTap: () => Navigator.pop(context),
                     child: Text(
