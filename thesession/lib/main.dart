@@ -3,7 +3,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:thesession/auth/main_page.dart';
 import 'dart:io' show Platform;
 import 'package:flutter/foundation.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 void main() async {
   _setTargetPlatformForDesktop();
@@ -31,10 +30,22 @@ class MyApp extends StatelessWidget {
       title: 'theSession',
       theme: ThemeData(
         primarySwatch: Colors.grey,
-        brightness: Brightness.dark,
+        brightness: Brightness.light,
       ),
-      darkTheme: ThemeData(textTheme: GoogleFonts.manropeTextTheme()),
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+        primarySwatch: Colors.amber,
+        appBarTheme: AppBarTheme(
+          backgroundColor: AppColours.DefaultDarkColour,
+        ),
+        backgroundColor: AppColours.DefaultDarkColour,
+        scaffoldBackgroundColor: AppColours.DefaultDarkColour,
+        bottomNavigationBarTheme: BottomNavigationBarThemeData(
+            backgroundColor: AppColours.DefaultDarkColour),
+      ),
+      themeMode: ThemeMode.system,
       home: const MainPage(),
+      debugShowCheckedModeBanner: false,
     );
   }
 
@@ -44,6 +55,6 @@ class MyApp extends StatelessWidget {
 }
 
 class AppColours {
-  static final Color DefaultDarkColour = Color.fromARGB(255, 47, 47, 47);
+  static final Color DefaultDarkColour = Color.fromARGB(255, 33, 32, 32);
   static final Color DefaultWhiteColour = Color.fromARGB(255, 218, 218, 218);
 }

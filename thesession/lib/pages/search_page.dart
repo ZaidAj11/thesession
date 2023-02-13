@@ -4,6 +4,8 @@ import 'package:thesession/main.dart';
 import 'package:thesession/models/tunes/searchResult.dart';
 import 'package:http/http.dart' as http;
 
+import 'api_results_pages/tune_info_page.dart';
+
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
 
@@ -88,10 +90,15 @@ class _SearchPageState extends State<SearchPage> {
               child: ListView.separated(
                 itemBuilder: (context, index) {
                   final searchResult = searchResults[index];
-                  return ListTile(
-                    title: Text(searchResult.name.toString()),
-                    subtitle: Text("By ${searchResult.member.name}"),
-                    trailing: Text(searchResult.date.toString()),
+                  return GestureDetector(
+                    onTap: () {
+                      _navigateToPost(context, index);
+                    },
+                    child: ListTile(
+                      title: Text(searchResult.name.toString()),
+                      subtitle: Text("By ${searchResult.member.name}"),
+                      trailing: Text(searchResult.date.toString()),
+                    ),
                   );
                 },
                 separatorBuilder: (context, index) => Divider(),
@@ -99,6 +106,19 @@ class _SearchPageState extends State<SearchPage> {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  void _navigateToPost(BuildContext context, int indexOfItem) {
+    var item = searchResults[indexOfItem];
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => TuneInfoPage(
+          tuneId: item.id.toString(),
+          settingId: '',
+          isNewTune: false,
         ),
       ),
     );

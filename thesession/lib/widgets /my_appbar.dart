@@ -6,7 +6,7 @@ import '../pages/search_page.dart';
 
 class MyAppBar extends StatefulWidget with PreferredSizeWidget {
   const MyAppBar({Key? key, required this.dropdown}) : super(key: key);
-  final DropdownButtonHideUnderline dropdown;
+  final Widget dropdown;
   @override
   State<MyAppBar> createState() => _MyAppBarState();
 
@@ -19,9 +19,14 @@ class _MyAppBarState extends State<MyAppBar> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      bottom: PreferredSize(
+          child: Container(
+            color: Colors.grey[850],
+            height: 1,
+          ),
+          preferredSize: Size.fromHeight(4.0)),
       elevation: 0,
       titleSpacing: 0,
-      backgroundColor: AppColours.DefaultDarkColour,
       centerTitle: false,
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

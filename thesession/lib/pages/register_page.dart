@@ -61,7 +61,7 @@ class _RegisterPageState extends State<RegisterPage> {
       duration: Duration(seconds: 1), //default is 4s
     );
     // Find the Scaffold in the widget tree and use it to show a SnackBar.
-    Scaffold.of(context).showSnackBar(snackBar);
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
   @override

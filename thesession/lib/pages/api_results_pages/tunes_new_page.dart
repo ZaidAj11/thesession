@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:http/http.dart' as http;
+import 'package:thesession/widgets%20/tune_display_card.dart';
 import '../../models/tunes/newTune.dart';
 import 'package:thesession/pages/api_results_pages/tune_info_page.dart';
+
+import '../../models/tunes/tuneInfo.dart';
 
 class NewTunesPage extends StatefulWidget {
   const NewTunesPage({Key? key}) : super(key: key);
@@ -18,7 +21,7 @@ class _NewTunesPageState extends State<NewTunesPage> {
   int _pageNum = 1;
   late int _totalPages;
 
-  List<NewTune> newTunes = [];
+  List<Post> newTunes = [];
 
   Future<bool> GetData({bool isRefresh = false}) async {
     if (isRefresh) {
@@ -35,11 +38,17 @@ class _NewTunesPageState extends State<NewTunesPage> {
 
     if (response.statusCode == 200) {
       final result = newTuneDataFromJson(response.body);
-      if (!isRefresh) {
-        newTunes.addAll(result.settings);
-      } else {
-        newTunes = result.settings;
+      List<Post> tempNewtunes = [];
+      for (int i = 0; i < result.settings.length; i++) {
+        tempNewtunes.add(await getNewTune(
+            result.settings[i].tune.id, result.settings[i].id));
       }
+      if (!isRefresh) {
+        newTunes.addAll(tempNewtunes);
+      } else {
+        newTunes = tempNewtunes;
+      }
+      newTunes.sort((a, b) => b.date.compareTo(a.date));
       _pageNum++;
       _totalPages = result.pages;
       setState(() {});
@@ -47,6 +56,15 @@ class _NewTunesPageState extends State<NewTunesPage> {
     } else {
       return false;
     }
+  }
+
+  Future<Post> getNewTune(int tuneId, int settingId) async {
+    Uri uri = Uri.parse(
+        "https://thesession.org/tunes/${tuneId}?format=json#setting'${settingId}");
+    final response = await http.get(uri);
+    final TuneInfo result = tuneInfoFromJson(response.body);
+
+    return result.posts.firstWhere((i) => i.id == settingId);
   }
 
   @override
@@ -73,32 +91,28 @@ class _NewTunesPageState extends State<NewTunesPage> {
         },
         child: ListView.separated(
             itemBuilder: (context, index) {
-              final newTune = newTunes[index];
-              return GestureDetector(
-                child: ListTile(
-                  title: Text(newTune.tune.name.toString()),
-                  subtitle: Text("By ${newTune.member.name}"),
-                  trailing: Text(newTune.date.toString()),
-                ),
-                onTap: () => {_navigateToPost(context, index)},
-              );
+              final Post newTune = newTunes[index];
+              return TuneCard(post: newTune);
             },
-            separatorBuilder: (context, index) => Divider(),
+            separatorBuilder: (context, index) => Container(
+                  color: Colors.black,
+                  height: 3,
+                ),
             itemCount: newTunes.length),
       ),
     );
   }
 
   void _navigateToPost(BuildContext context, int indexOfItem) {
-    var item = newTunes[indexOfItem];
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => TuneInfoPage(
-          tuneId: item.tune.id.toString(),
-          settingId: item.id.toString(),
-          isNewTune: true,
-        ),
-      ),
-    );
+    // Post item = newTunes[indexOfItem];
+    // Navigator.of(context).push(
+    //   MaterialPageRoute(
+    //     builder: (context) => TuneInfoPage(
+    //       tuneId: item.id.toString(),
+    //       settingId: item.id.toString(),
+    //       isNewTune: true,
+    //     ),
+    //   ),
+    // );
   }
 }

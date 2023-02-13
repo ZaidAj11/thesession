@@ -24,12 +24,16 @@ class _TuneCardState extends State<TuneCard> {
             Expanded(
               child: Wrap(
                 children: [
-                  ProfileIcon(),
                   Padding(
-                    padding: EdgeInsets.fromLTRB(8.0, 8, 0, 0),
+                    padding: const EdgeInsets.fromLTRB(8, 4, 0, 0),
+                    child: ProfileIcon(),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(8.0, 20, 0, 0),
                     child: Text(
                       widget.post.member.name,
-                      style: TextStyle(fontSize: 28),
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
                     ),
                   ),
                 ],
@@ -39,13 +43,13 @@ class _TuneCardState extends State<TuneCard> {
               padding: EdgeInsets.fromLTRB(0, 8, 8, 0),
               child: Text(
                 formatter.format(widget.post.date).toString(),
-                style: TextStyle(fontSize: 16),
+                style: TextStyle(fontSize: 14),
               ),
             ),
           ],
         ),
         Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.fromLTRB(15.0, 8, 8, 8),
           child: Text(widget.post.abc),
         ),
         Row(
