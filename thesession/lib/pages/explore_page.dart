@@ -8,8 +8,8 @@ import 'package:thesession/main.dart';
 import 'package:thesession/pages/api_results_pages/tunes_popular_page.dart';
 import 'package:thesession/pages/api_results_pages/tunes_recording_page.dart';
 import 'package:thesession/pages/search_page.dart';
-import 'package:thesession/widgets%20/side_drawer.dart';
-import '../widgets /my_appbar.dart';
+import 'package:thesession/widgets/side_drawer.dart';
+import '../widgets/my_appbar.dart';
 import 'api_results_pages/tunes_new_page.dart';
 
 class ExplorePage extends StatefulWidget {

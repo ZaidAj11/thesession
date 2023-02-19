@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:thesession/models/tunes/tuneInfo.dart';
-import 'package:thesession/widgets%20/profile_icon.dart';
+import 'package:thesession/widgets/profile_icon.dart';
 import 'package:intl/intl.dart';
 
 class TuneCard extends StatefulWidget {
