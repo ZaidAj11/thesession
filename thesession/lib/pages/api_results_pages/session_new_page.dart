@@ -94,10 +94,10 @@ class _NewSessionPageState extends State<NewSessionPage> {
   }
 
   void _navigateToPost(BuildContext context, int indexOfItem) {
-    var item = newSessions[indexOfItem];
+    Session item = newSessions[indexOfItem];
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => SessionInfoPage(title: item.venue.name),
+        builder: (context) => SessionInfoPage(session: item),
       ),
     );
   }
