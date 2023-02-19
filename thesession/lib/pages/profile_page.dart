@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:thesession/widgets%20/profile_icon.dart';
+import 'package:thesession/widgets/profile_icon.dart';
 
 import '../main.dart';
 
@@ -25,8 +25,6 @@ class _ProfilePageState extends State<ProfilePage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text('Signed in as ${user?.email} '),
-          // Sign in button
-
           ProfileIcon(),
         ],
       ),

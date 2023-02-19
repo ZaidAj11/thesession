@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "115808993664",
+    "project_id": "the-session-2e9b2",
+    "storage_bucket": "the-session-2e9b2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:115808993664:android:64becaf188112f7c790165",
+        "android_client_info": {
+          "package_name": "zaiddev.thesession"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "115808993664-fdisq5gqb7vmj18puubn3167huo3cgb0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4fWOBF8dmGWxq05hhUbM_19rJXBl9NZo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "115808993664-fdisq5gqb7vmj18puubn3167huo3cgb0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "115808993664-4fd6nels2tn2u0k7mvb2c92kb4a9cbrd.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "zaiddev.thesession"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

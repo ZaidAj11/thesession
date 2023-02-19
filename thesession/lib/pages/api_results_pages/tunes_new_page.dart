@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:http/http.dart' as http;
-import 'package:thesession/widgets%20/tune_display_card.dart';
+import 'package:thesession/widgets/tune_display_card.dart';
 import '../../models/tunes/newTune.dart';
 import 'package:thesession/pages/api_results_pages/tune_info_page.dart';
 
