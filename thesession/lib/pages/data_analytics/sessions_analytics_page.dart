@@ -37,21 +37,25 @@ class _SessionsAnalyticsPageState extends State<SessionsAnalyticsPage> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Column(
-        children: [
-          FutureBuilder(
-              future: getData(),
-              builder: (
-                BuildContext context,
-                AsyncSnapshot snapshot,
-              ) {
-                if (sessionData.isNotEmpty) {
-                  return Column(
-                    children: [
-                      Container(
-                          child: SfCircularChart(series: <CircularSeries>[
+      child: FutureBuilder(
+          future: getData(),
+          builder: (
+            BuildContext context,
+            AsyncSnapshot snapshot,
+          ) {
+            if (sessionData.isNotEmpty) {
+              return SingleChildScrollView(
+                  child: Column(
+                children: [
+                  Container(
+                      child: SfCircularChart(
+                          legend: Legend(isVisible: true, isResponsive: true),
+                          series: <CircularSeries>[
                         // Render pie chart
                         PieSeries<ItemCountryData, String>(
+                            dataLabelSettings:
+                                DataLabelSettings(isVisible: true),
+                            name: "Sessions by Country",
                             dataSource: sessionData,
                             pointColorMapper: (ItemCountryData data, _) =>
                                 data.color,
@@ -59,14 +63,44 @@ class _SessionsAnalyticsPageState extends State<SessionsAnalyticsPage> {
                                 data.item,
                             yValueMapper: (ItemCountryData data, _) =>
                                 data.count)
-                      ]))
-                    ],
-                  );
-                }
-                return CircularProgressIndicator();
-              })
-        ],
-      ),
+                      ])),
+                  Container(
+                      child: SfCartesianChart(
+                          primaryXAxis: CategoryAxis(),
+                          series: <ChartSeries<ItemCountryData, String>>[
+                        // Renders column chart
+                        ColumnSeries<ItemCountryData, String>(
+                            dataSource: sessionData,
+                            xValueMapper: (ItemCountryData data, _) =>
+                                data.item,
+                            yValueMapper: (ItemCountryData data, _) =>
+                                data.count)
+                      ])),
+                  Container(
+                      child: SfCircularChart(series: <CircularSeries>[
+                    // Render pie chart
+                    PieSeries<ItemCountryData, String>(
+                        dataSource: sessionData,
+                        pointColorMapper: (ItemCountryData data, _) =>
+                            data.color,
+                        xValueMapper: (ItemCountryData data, _) => data.item,
+                        yValueMapper: (ItemCountryData data, _) => data.count)
+                  ])),
+                  Container(
+                      child: SfCircularChart(series: <CircularSeries>[
+                    // Render pie chart
+                    PieSeries<ItemCountryData, String>(
+                        dataSource: sessionData,
+                        pointColorMapper: (ItemCountryData data, _) =>
+                            data.color,
+                        xValueMapper: (ItemCountryData data, _) => data.item,
+                        yValueMapper: (ItemCountryData data, _) => data.count)
+                  ]))
+                ],
+              ));
+            }
+            return CircularProgressIndicator();
+          }),
     );
   }
 }
