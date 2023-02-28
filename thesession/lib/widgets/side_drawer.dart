@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:thesession/pages/data_analytics/data_analytics_page.dart';
 
 class SideDrawer extends StatelessWidget {
   final userName;
@@ -48,7 +49,7 @@ class SideDrawer extends StatelessWidget {
                               thickness: 2,
                             ),
                             DrawerItem(
-                              doSomething: () => {},
+                              doSomething: () => _navigateToDataPage(context),
                               content: 'Data Analytics',
                               trailingIcon: Icon(Icons.auto_graph),
                             ),
@@ -69,6 +70,14 @@ class SideDrawer extends StatelessWidget {
             ),
           );
         },
+      ),
+    );
+  }
+
+  void _navigateToDataPage(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => DataAnalyticsPage(),
       ),
     );
   }

@@ -43,6 +43,7 @@ dependencies:
   country_flags: ^1.0.0
   geocoder: ^0.2.1
   google_maps_flutter: ^2.2.3
+  syncfusion_flutter_charts: ^20.4.52
 
 dev_dependencies:
   flutter_test:
