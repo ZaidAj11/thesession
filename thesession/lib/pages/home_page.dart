@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:thesession/main.dart';
 import 'package:thesession/pages/community_page.dart';
 import 'package:thesession/pages/explore_page.dart';
-import 'package:thesession/pages/news_page.dart';
+import 'package:thesession/pages/news/news_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

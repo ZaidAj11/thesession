@@ -9,24 +9,30 @@ class NewsArticleCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          children: [
-            image,
-            Expanded(
-              child: Text(
-                article.title,
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-            )
-          ],
-        ),
-        Text(
-          article.description,
-          style: TextStyle(fontWeight: FontWeight.w200),
-        )
-      ],
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              image,
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
+                  child: Text(
+                    article.title,
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
+              )
+            ],
+          ),
+          Text(
+            article.description,
+            style: TextStyle(fontWeight: FontWeight.w200),
+          )
+        ],
+      ),
     );
   }
 }

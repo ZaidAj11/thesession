@@ -6,10 +6,11 @@ import 'package:thesession/models/news/newsModel.dart';
 import 'package:thesession/models/tunes/popularTune.dart';
 import 'package:thesession/main.dart';
 import 'package:thesession/pages/api_results_pages/tune_info_page.dart';
+import 'package:thesession/pages/news/news_article_page.dart';
 import 'package:thesession/widgets/my_appbar.dart';
 import 'package:thesession/widgets/news/news_article_card.dart';
-import '../../models/tunes/newTune.dart';
-import '../widgets/side_drawer.dart';
+import '../../../models/tunes/newTune.dart';
+import '../../widgets/side_drawer.dart';
 
 class NewsPage extends StatefulWidget {
   const NewsPage({Key? key}) : super(key: key);
@@ -91,13 +92,16 @@ class _NewsPageState extends State<NewsPage> {
           child: ListView.separated(
               itemBuilder: (context, index) {
                 final article = articles[index];
-                return NewsArticleCard(
-                  image: Image.network(
-                    article.imageUrl,
-                    width: 90,
-                    height: 90,
+                return GestureDetector(
+                  onTap: () => _navigateToPost(context, index),
+                  child: NewsArticleCard(
+                    image: Image.network(
+                      article.imageUrl,
+                      width: 90,
+                      height: 90,
+                    ),
+                    article: article,
                   ),
-                  article: article,
                 );
               },
               separatorBuilder: (context, index) => Divider(
@@ -105,6 +109,15 @@ class _NewsPageState extends State<NewsPage> {
                   ),
               itemCount: articles.length),
         ),
+      ),
+    );
+  }
+
+  void _navigateToPost(BuildContext context, int indexOfItem) {
+    Article item = articles[indexOfItem];
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => NewsArticlePage(article: item),
       ),
     );
   }

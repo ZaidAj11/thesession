@@ -50,6 +50,7 @@ class _SessionsAnalyticsPageState extends State<SessionsAnalyticsPage> {
                   Container(
                       child: SfCircularChart(
                           legend: Legend(isVisible: true, isResponsive: true),
+                          title: ChartTitle(text: "Sessions by Country"),
                           series: <CircularSeries>[
                         // Render pie chart
                         PieSeries<ItemCountryData, String>(
@@ -67,6 +68,7 @@ class _SessionsAnalyticsPageState extends State<SessionsAnalyticsPage> {
                   Container(
                       child: SfCartesianChart(
                           primaryXAxis: CategoryAxis(),
+                          title: ChartTitle(text: "Sessions by Irish County"),
                           series: <ChartSeries<ItemCountryData, String>>[
                         // Renders column chart
                         ColumnSeries<ItemCountryData, String>(
