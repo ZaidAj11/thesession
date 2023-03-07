@@ -26,7 +26,8 @@ class _TuneCardState extends State<TuneCard> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.fromLTRB(8, 4, 0, 0),
-                    child: ProfileIcon(),
+                    child: ProfileIcon(
+                        username: widget.post.member.name.toString()),
                   ),
                   Padding(
                     padding: EdgeInsets.fromLTRB(8.0, 20, 0, 0),

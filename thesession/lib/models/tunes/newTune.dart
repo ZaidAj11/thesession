@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'tuneInfo.dart';
+
 NewTuneData newTuneDataFromJson(String str) =>
     NewTuneData.fromJson(json.decode(str));
 
@@ -79,29 +81,5 @@ class NewTune {
         "member": member.toJson(),
         "date": date.toIso8601String(),
         "tune": tune.toJson(),
-      };
-}
-
-class Member {
-  Member({
-    required this.id,
-    required this.name,
-    required this.url,
-  });
-
-  int id;
-  String name;
-  String url;
-
-  factory Member.fromJson(Map<String, dynamic> json) => Member(
-        id: json["id"],
-        name: json["name"],
-        url: json["url"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-        "url": url,
       };
 }

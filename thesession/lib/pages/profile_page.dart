@@ -27,7 +27,7 @@ class _ProfilePageState extends State<ProfilePage> {
           Text('Signed in as ${user?.email} '),
           // Sign in button
 
-          ProfileIcon(),
+          ProfileIcon(username: user!.displayName!),
         ],
       ),
     );

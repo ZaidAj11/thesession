@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:http/http.dart' as http;
 import 'package:thesession/pages/api_results_pages/tune_info_page.dart';
-import 'package:thesession/pages/session_info_page.dart';
 import 'package:thesession/widgets/community/session_display_card.dart';
 import '../../models/community/newSession.dart';
+import '../community_pages/session_info_page.dart';
 
 class NewSessionPage extends StatefulWidget {
   const NewSessionPage({Key? key}) : super(key: key);

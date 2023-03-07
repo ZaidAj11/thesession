@@ -6,7 +6,8 @@ import 'dart:math';
 import 'package:thesession/main.dart';
 
 class ProfileIcon extends StatelessWidget {
-  ProfileIcon({Key? key}) : super(key: key);
+  final String username;
+  ProfileIcon({Key? key, required this.username}) : super(key: key);
   final rng = new Random();
   @override
   Widget build(BuildContext context) {
@@ -20,10 +21,18 @@ class ProfileIcon extends StatelessWidget {
       ),
       child: Center(
         child: Text(
-          "P.P",
+          getInitials(username),
           style: TextStyle(fontSize: 16, color: Colors.white),
         ),
       ),
     );
+  }
+
+  String getInitials(String username) {
+    var nameSplit = username.split(' ');
+    if (nameSplit.length > 1)
+      return "${nameSplit[0][0]}.${nameSplit[0][0]}";
+    else
+      return username[0];
   }
 }

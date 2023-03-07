@@ -3,7 +3,6 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:http/http.dart' as http;
 import 'package:thesession/widgets/tune_display_card.dart';
 import '../../models/tunes/newTune.dart';
-import 'package:thesession/pages/api_results_pages/tune_info_page.dart';
 
 import '../../models/tunes/tuneInfo.dart';
 
@@ -64,7 +63,15 @@ class _NewTunesPageState extends State<NewTunesPage> {
     final response = await http.get(uri);
     final TuneInfo result = tuneInfoFromJson(response.body);
 
-    return result.posts.firstWhere((i) => i.id == settingId);
+    return result.posts.length > 0
+        ? result.posts.firstWhere((i) => i.id == settingId)
+        : Post(
+            id: 0,
+            url: 'url',
+            key: 'key',
+            abc: 'abc',
+            member: Member(id: 0, name: 'name', url: 'url'),
+            date: DateTime.now());
   }
 
   @override

@@ -4,7 +4,26 @@
 
 import 'dart:convert';
 
-TuneInfo tuneInfoFromJson(String str) => TuneInfo.fromJson(json.decode(str));
+TuneInfo tuneInfoFromJson(String str) {
+  try {
+    return TuneInfo.fromJson(json.decode(str));
+  } catch (Exception) {
+    return new TuneInfo(
+        format: '',
+        id: 0,
+        name: 'name',
+        url: 'url',
+        member: Member(id: 0, name: 'name', url: 'url'),
+        date: DateTime.now(),
+        type: 'type',
+        tunebooks: 0,
+        recordings: 0,
+        collections: 0,
+        aliases: [],
+        posts: [],
+        comments: []);
+  }
+}
 
 String tuneInfoToJson(TuneInfo data) => json.encode(data.toJson());
 
@@ -30,7 +49,7 @@ class TuneInfo {
   String name;
   String url;
   Member member;
-  DateTime date;
+  DateTime? date;
   String type;
   int tunebooks;
   int recordings;
@@ -45,7 +64,7 @@ class TuneInfo {
         name: json["name"],
         url: json["url"],
         member: Member.fromJson(json["member"]),
-        date: DateTime.parse(json["date"]),
+        date: DateTime.tryParse(json["date"]),
         type: json["type"],
         tunebooks: json["tunebooks"],
         recordings: json["recordings"],
@@ -62,7 +81,7 @@ class TuneInfo {
         "name": name,
         "url": url,
         "member": member.toJson(),
-        "date": date.toIso8601String(),
+        "date": date?.toIso8601String(),
         "type": type,
         "tunebooks": tunebooks,
         "recordings": recordings,
@@ -120,11 +139,17 @@ class Member {
   String name;
   String url;
 
-  factory Member.fromJson(Map<String, dynamic> json) => Member(
+  factory Member.fromJson(Map<String, dynamic> json) {
+    try {
+      return Member(
         id: json["id"],
         name: json["name"],
         url: json["url"],
       );
+    } catch (Exception) {
+      return new Member(id: 1, name: 'Empty', url: 'Empty');
+    }
+  }
 
   Map<String, dynamic> toJson() => {
         "id": id,
