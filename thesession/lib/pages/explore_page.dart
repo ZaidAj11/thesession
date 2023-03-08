@@ -38,6 +38,7 @@ class _ExplorePageState extends State<ExplorePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MyAppBar(
+        useSearch: true,
         dropdown: DropdownButtonHideUnderline(
           child: DropdownButton2(
             items: _items

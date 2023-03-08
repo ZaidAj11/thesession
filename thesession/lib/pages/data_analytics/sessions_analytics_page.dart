@@ -19,16 +19,21 @@ class SessionsAnalyticsPage extends StatefulWidget {
 }
 
 class _SessionsAnalyticsPageState extends State<SessionsAnalyticsPage> {
-  List<ItemCountryData> sessionData = [];
+  List<ItemCountryData> sessionCountryData = [];
+  List<ItemCountryData> sessionCountyData = [];
+
   final user = FirebaseAuth.instance.currentUser;
   final db = FirebaseFirestore.instance;
 
   Future<bool> getData() async {
     bool isReady = await widget.dataManager.setSessionData();
     if (isReady) {
-      sessionData
+      sessionCountryData
           .addAll(await widget.dataManager.getSessionToCountrySections());
-      if (sessionData.isNotEmpty) return true;
+      sessionCountyData
+          .addAll(await widget.dataManager.getSessionToCountySections());
+      if (sessionCountryData.isNotEmpty && sessionCountyData.isNotEmpty)
+        return true;
       return false;
     }
     return false;
@@ -43,9 +48,10 @@ class _SessionsAnalyticsPageState extends State<SessionsAnalyticsPage> {
             BuildContext context,
             AsyncSnapshot snapshot,
           ) {
-            if (sessionData.isNotEmpty) {
+            if (sessionCountryData.isNotEmpty) {
               return SingleChildScrollView(
                   child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Container(
                       child: SfCircularChart(
@@ -57,7 +63,7 @@ class _SessionsAnalyticsPageState extends State<SessionsAnalyticsPage> {
                             dataLabelSettings:
                                 DataLabelSettings(isVisible: true),
                             name: "Sessions by Country",
-                            dataSource: sessionData,
+                            dataSource: sessionCountryData,
                             pointColorMapper: (ItemCountryData data, _) =>
                                 data.color,
                             xValueMapper: (ItemCountryData data, _) =>
@@ -72,32 +78,12 @@ class _SessionsAnalyticsPageState extends State<SessionsAnalyticsPage> {
                           series: <ChartSeries<ItemCountryData, String>>[
                         // Renders column chart
                         ColumnSeries<ItemCountryData, String>(
-                            dataSource: sessionData,
+                            dataSource: sessionCountyData,
                             xValueMapper: (ItemCountryData data, _) =>
                                 data.item,
                             yValueMapper: (ItemCountryData data, _) =>
                                 data.count)
                       ])),
-                  Container(
-                      child: SfCircularChart(series: <CircularSeries>[
-                    // Render pie chart
-                    PieSeries<ItemCountryData, String>(
-                        dataSource: sessionData,
-                        pointColorMapper: (ItemCountryData data, _) =>
-                            data.color,
-                        xValueMapper: (ItemCountryData data, _) => data.item,
-                        yValueMapper: (ItemCountryData data, _) => data.count)
-                  ])),
-                  Container(
-                      child: SfCircularChart(series: <CircularSeries>[
-                    // Render pie chart
-                    PieSeries<ItemCountryData, String>(
-                        dataSource: sessionData,
-                        pointColorMapper: (ItemCountryData data, _) =>
-                            data.color,
-                        xValueMapper: (ItemCountryData data, _) => data.item,
-                        yValueMapper: (ItemCountryData data, _) => data.count)
-                  ]))
                 ],
               ));
             }

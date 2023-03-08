@@ -23,6 +23,7 @@ class _CommunityPageState extends State<CommunityPage> {
           userName: user?.email,
         ),
         appBar: MyAppBar(
+          useSearch: true,
           dropdown: Text("Community"),
         ),
         body: SafeArea(

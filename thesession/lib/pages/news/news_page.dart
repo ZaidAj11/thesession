@@ -67,6 +67,7 @@ class _NewsPageState extends State<NewsPage> {
         userName: user?.email,
       ),
       appBar: MyAppBar(
+        useSearch: true,
         dropdown: Text("News - Irish Tunes"),
       ),
       body: SafeArea(
