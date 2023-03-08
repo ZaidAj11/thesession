@@ -13,12 +13,16 @@ class TunesAnalyticsPage extends StatefulWidget {
 class _TunesAnalyticsPageState extends State<TunesAnalyticsPage> {
   List<ItemCountryData> tuneData = [];
   List<ItemCountryData> tuneSetsData = [];
+  List<ItemCountryData> tuneYearsData = [];
 
   Future<bool> getData() async {
     bool isReady = await widget.dataManager.setTuneData();
     if (isReady) {
       tuneData.addAll(await widget.dataManager.getTuneToTypeSections());
       tuneSetsData.addAll(await widget.dataManager.getTuneToTypeSections());
+      tuneYearsData.addAll(await widget.dataManager.getTuneToDateSections());
+      tuneYearsData
+          .sort((a, b) => int.parse(a.item).compareTo(int.parse(b.item)));
       if (tuneData.isNotEmpty) return true;
       return false;
     }
@@ -68,6 +72,21 @@ class _TunesAnalyticsPageState extends State<TunesAnalyticsPage> {
                                   data.item,
                               yValueMapper: (ItemCountryData data, _) =>
                                   data.count)
+                        ]),
+                  ),
+                  Container(
+                    child: SfCartesianChart(
+                        title: ChartTitle(text: "Tunes Per Year"),
+                        primaryXAxis:
+                            CategoryAxis(), // Initialize category axis.
+                        series: <LineSeries<ItemCountryData, String>>[
+                          // Initialize line series.
+                          LineSeries<ItemCountryData, String>(
+                              dataSource: tuneYearsData,
+                              xValueMapper: (ItemCountryData sales, _) =>
+                                  sales.item,
+                              yValueMapper: (ItemCountryData sales, _) =>
+                                  sales.count)
                         ]),
                   ),
                 ],

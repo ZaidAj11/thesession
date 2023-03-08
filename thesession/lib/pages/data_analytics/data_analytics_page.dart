@@ -44,7 +44,7 @@ class _DataAnalyticsPageState extends State<DataAnalyticsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MyAppBar(
-        useSearch: true,
+        useSearch: false,
         dropdown: DropdownButtonHideUnderline(
           child: DropdownButton2(
             items: _items

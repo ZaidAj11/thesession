@@ -18,7 +18,7 @@ class DataManager {
   List<SessionData> _sessionData = [];
   List<TuneData> _tuneData = [];
 
-  Future<List<ItemCountryData>> getTuneSeteSections() async {
+  Future<List<ItemCountryData>> getTuneSetSections() async {
     HashSet<Color> colorsUsed;
     HashMap<String, ItemCountryData> countryToItemMap =
         new HashMap<String, ItemCountryData>();
@@ -31,6 +31,31 @@ class DataManager {
       } else {
         countryToItemMap.update(
           tunePost.type.name,
+          (value) => ItemCountryData(
+            value.item,
+            value.count + 1,
+            value.color,
+          ),
+        );
+      }
+    }
+    return countryToItemMap.values.toList();
+  }
+
+  Future<List<ItemCountryData>> getTuneToDateSections() async {
+    HashSet<Color> colorsUsed;
+    HashMap<int, ItemCountryData> countryToItemMap =
+        new HashMap<int, ItemCountryData>();
+    for (var tunePost in _tuneData) {
+      if (tunePost.date == null) continue;
+      if (!countryToItemMap.containsKey(tunePost.date?.year)) {
+        countryToItemMap[tunePost.date!.year] = ItemCountryData(
+            tunePost.date!.year.toString(),
+            1,
+            Color((math.nextDouble() * 0xFFFFFF).toInt()).withOpacity(1.0));
+      } else {
+        countryToItemMap.update(
+          tunePost.date!.year,
           (value) => ItemCountryData(
             value.item,
             value.count + 1,

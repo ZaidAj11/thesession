@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:thesession/models/tunes/popularTune.dart';
 import 'package:thesession/main.dart';
 import 'package:thesession/pages/api_results_pages/tune_info_page.dart';
+import 'package:thesession/widgets/explore/popular_tune_card.dart';
 import '../../models/tunes/newTune.dart';
 
 class PopularTunesPage extends StatefulWidget {
@@ -76,42 +77,11 @@ class _PopularTunesPageState extends State<PopularTunesPage> {
         child: ListView.separated(
             itemBuilder: (context, index) {
               final popTune = popularTunes[index];
-              return Card(
-                // ignore: sort_child_properties_last
-                child: GestureDetector(
-                  child: Column(
-                    children: [
-                      ListTile(
-                        title: Text(
-                          popTune.name.toString(),
-                          style: TextStyle(
-                              fontSize: 22, fontWeight: FontWeight.w400),
-                        ),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-                            child: Text("In ${popTune.tunebooks} tunebooks"),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 0, 15, 0),
-                            child: Text(
-                              'Share',
-                            ),
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
-                  onTap: () {
-                    _navigateToPost(context, index);
-                  },
-                ),
-                margin: EdgeInsets.all(0),
-                shape: BeveledRectangleBorder(),
-                shadowColor: Colors.transparent,
+              return GestureDetector(
+                child: PopularTuneCard(popTune: popTune),
+                onTap: () {
+                  _navigateToPost(context, index);
+                },
               );
             },
             separatorBuilder: (context, index) => Divider(

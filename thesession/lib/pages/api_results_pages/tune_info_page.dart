@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:thesession/main.dart';
 import 'package:thesession/models/tunes/tuneInfo.dart';
-import 'package:thesession/widgets/tune_display_card.dart';
+import 'package:thesession/widgets/explore/tune_display_card.dart';
 
 class TuneInfoPage extends StatefulWidget {
   final String tuneId;
