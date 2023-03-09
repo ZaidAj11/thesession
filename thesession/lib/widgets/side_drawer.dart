@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:thesession/pages/data_analytics/data_analytics_page.dart';
+import 'package:thesession/widgets/profile_icon.dart';
 
 class SideDrawer extends StatelessWidget {
   final userName;
@@ -30,16 +31,8 @@ class SideDrawer extends StatelessWidget {
                         Column(
                           children: <Widget>[
                             // Name
-                            Container(
-                              width: 175,
-                              height: 175,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                image: DecorationImage(
-                                    image: NetworkImage(
-                                        'https://googleflutter.com/sample_image.jpg'),
-                                    fit: BoxFit.fill),
-                              ),
+                            ProfileIcon(
+                              username: userName,
                             ),
                             Padding(
                               padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),

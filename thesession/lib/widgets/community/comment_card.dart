@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../../models/community/sessionInfo.dart';
+import '../../utils/objects.dart';
 import '../profile_icon.dart';
 
 class CommentCard extends StatelessWidget {

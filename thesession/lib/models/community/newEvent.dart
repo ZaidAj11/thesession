@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import '../../utils/objects.dart';
+
 NewEvent newEventFromJson(String str) => NewEvent.fromJson(json.decode(str));
 
 String newEventToJson(NewEvent data) => json.encode(data.toJson());
@@ -106,81 +108,5 @@ class Event {
         "town": town?.toJson(),
         "area": area?.toJson(),
         "country": country?.toJson(),
-      };
-}
-
-class Area {
-  Area({
-    required this.id,
-    required this.name,
-  });
-
-  int id;
-  String name;
-
-  factory Area.fromJson(Map<String, dynamic> json) => Area(
-        id: json["id"],
-        name: json["name"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-      };
-}
-
-class Member {
-  Member({
-    required this.id,
-    required this.name,
-    required this.url,
-  });
-
-  int id;
-  String name;
-  String url;
-
-  factory Member.fromJson(Map<String, dynamic> json) => Member(
-        id: json["id"],
-        name: json["name"],
-        url: json["url"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-        "url": url,
-      };
-}
-
-class Venue {
-  Venue({
-    required this.name,
-    this.id,
-    this.telephone,
-    this.email,
-    this.web,
-  });
-
-  String name;
-  int? id;
-  String? telephone;
-  String? email;
-  String? web;
-
-  factory Venue.fromJson(Map<String, dynamic> json) => Venue(
-        name: json["name"],
-        id: json["id"],
-        telephone: json["telephone"],
-        email: json["email"],
-        web: json["web"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "name": name,
-        "id": id,
-        "telephone": telephone,
-        "email": email,
-        "web": web,
       };
 }

@@ -6,6 +6,7 @@ import 'package:thesession/models/tunes/recordingTune.dart';
 import 'package:thesession/main.dart';
 import 'package:thesession/pages/api_results_pages/tune_info_page.dart';
 import '../../models/tunes/newTune.dart';
+import '../../widgets/explore/recording_tune.dart';
 
 class RecordingTunesPage extends StatefulWidget {
   const RecordingTunesPage({Key? key}) : super(key: key);
@@ -77,42 +78,8 @@ class _RecordingTunesPageState extends State<RecordingTunesPage> {
         child: ListView.separated(
             itemBuilder: (context, index) {
               final recording = _recordings[index];
-              return Card(
-                // ignore: sort_child_properties_last
-                child: GestureDetector(
-                  child: Column(
-                    children: [
-                      ListTile(
-                        title: Text(
-                          recording.name.toString(),
-                          style: TextStyle(
-                              fontSize: 22, fontWeight: FontWeight.w400),
-                        ),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-                            child: Text("Recording type: ${recording.type}"),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 0, 15, 0),
-                            child: Text(
-                              'Share',
-                            ),
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
-                  onTap: () {
-                    _navigateToPost(context, index);
-                  },
-                ),
-                margin: EdgeInsets.all(0),
-                shape: BeveledRectangleBorder(),
-                shadowColor: Colors.transparent,
+              return RecordingTuneCard(
+                recording: recording,
               );
             },
             separatorBuilder: (context, index) => Divider(

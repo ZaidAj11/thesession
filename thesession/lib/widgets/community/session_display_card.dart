@@ -4,6 +4,7 @@ import 'package:geocoder/geocoder.dart';
 import 'package:thesession/utils/geoLocator.dart';
 import 'package:thesession/widgets/community/details_card.dart';
 import '../../models/community/newSession.dart';
+import '../../pages/community_pages/session_info_page.dart';
 
 class SessionCard extends StatefulWidget {
   final Session session;
@@ -51,7 +52,8 @@ class _SessionCardState extends State<SessionCard> {
               ),
             ],
           ),
-          Expanded(child: DetailsCard(session: widget.session)),
+          Expanded(
+              child: SessionInfoPage.getDetailsCardForSession(widget.session)),
         ],
       ),
     );

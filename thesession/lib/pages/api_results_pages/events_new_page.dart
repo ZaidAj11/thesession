@@ -3,8 +3,6 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:http/http.dart' as http;
 import 'package:thesession/widgets/community/event_display_card.dart';
 import '../../models/community/newEvent.dart';
-import '../../models/community/newSession.dart';
-import '../../widgets/community/session_display_card.dart';
 import '../community_pages/event_info_page.dart';
 
 class NewEventPage extends StatefulWidget {
@@ -98,7 +96,9 @@ class _NewEventPageState extends State<NewEventPage> {
     var item = newEvents[indexOfItem];
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => EventInfoPage(title: item.venue.name),
+        builder: (context) => EventInfoPage(
+          event: item,
+        ),
       ),
     );
   }

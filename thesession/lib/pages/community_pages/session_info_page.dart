@@ -1,17 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
-import 'package:thesession/models/community/newEvent.dart';
-import 'package:thesession/models/community/sessionInfo.dart';
 import 'package:thesession/widgets/community/comment_card.dart';
 import 'package:thesession/widgets/community/details_card.dart';
 
 import '../../main.dart';
 import '../../models/community/newSession.dart';
+import '../../models/community/sessionInfo.dart';
+import '../../utils/objects.dart';
 
 class SessionInfoPage extends StatefulWidget {
   final Session session;
   const SessionInfoPage({super.key, required this.session});
+  static DetailsCard getDetailsCardForSession(Session session) {
+    return DetailsCard(
+      where: session.url,
+      createdBy: session.member.name,
+      venue: session.venue.name,
+      area: session.area,
+      town: session.town,
+      country: session.country,
+      date: session.date,
+    );
+  }
 
   @override
   State<SessionInfoPage> createState() => _SessionInfoPageState();
@@ -66,19 +77,19 @@ class _SessionInfoPageState extends State<SessionInfoPage> {
                 },
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
-            Text(
+            const Text(
               "Details",
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
             ),
-            DetailsCard(session: widget.session),
-            Text(
+            SessionInfoPage.getDetailsCardForSession(widget.session),
+            const Text(
               "Comments",
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Expanded(
@@ -94,8 +105,9 @@ class _SessionInfoPageState extends State<SessionInfoPage> {
                       },
                       itemCount: comments.length,
                     );
-                  } else
-                    return Center(child: CircularProgressIndicator());
+                  } else {
+                    return const Center(child: CircularProgressIndicator());
+                  }
                 },
               ),
             )

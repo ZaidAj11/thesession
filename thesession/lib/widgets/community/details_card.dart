@@ -1,10 +1,25 @@
 import 'package:flutter/material.dart';
 
-import '../../models/community/newSession.dart';
+import '../../utils/objects.dart';
 
 class DetailsCard extends StatelessWidget {
-  final Session session;
-  const DetailsCard({super.key, required this.session});
+  final String where;
+  final String createdBy;
+  final String venue;
+  final Area? area;
+  final Area? town;
+  final Area? country;
+  final DateTime date;
+
+  const DetailsCard(
+      {super.key,
+      required this.where,
+      required this.createdBy,
+      required this.venue,
+      required this.area,
+      required this.town,
+      required this.country,
+      required this.date});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +32,7 @@ class DetailsCard extends StatelessWidget {
               "Created by:",
               style: TextStyle(fontWeight: FontWeight.w500),
             ),
-            Text(session.member.name)
+            Text(createdBy)
           ],
         ),
         Row(
@@ -27,7 +42,7 @@ class DetailsCard extends StatelessWidget {
               "Venue:",
               style: TextStyle(fontWeight: FontWeight.w500),
             ),
-            Text(session.venue.name),
+            Text(venue),
           ],
         ),
         Row(
@@ -37,7 +52,7 @@ class DetailsCard extends StatelessWidget {
               "Where:",
               style: TextStyle(fontWeight: FontWeight.w500),
             ),
-            Text(getAddress(session)),
+            Text("${area!.name},\n${town!.name},\n${country!.name}"),
           ],
         ),
         Row(
@@ -48,14 +63,10 @@ class DetailsCard extends StatelessWidget {
               "When:",
               style: TextStyle(fontWeight: FontWeight.w500),
             ),
-            Text(session.date.toIso8601String()),
+            Text(date.toIso8601String()),
           ],
         ),
       ],
     );
-  }
-
-  String getAddress(Session session) {
-    return "${session.area.name},\n${session.town.name},\n${session.country.name}";
   }
 }
