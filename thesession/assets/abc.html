@@ -1,0 +1,29 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>ABC notation</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/abcjs/6.1.9/abcjs-basic-min.min.js"
+        integrity="sha512-TWeVoG+D8Ers4F8d5azaON3nJCxTewyuz8wZwoXbBCaPXNTCsoe0k2PHnLZ8mZ1C/qISkw16YPeH8X3VgmQceQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
+<body>
+    <div id="notation"></div>
+    <script>
+        var notationDiv = document.getElementById('notation');
+        var abcString = `X: 1
+T: Gan Ainm
+R: reel
+M: 4/4
+L: 1/8
+K: Dmaj
+Eeed edeg|dedB GABG|Eeed e2ge|dBgB A2GF|
+Eeed edeg|dedB GABG|Eeed eage|dBgB A2(3Bcd||
+eaca e3g|dgBg Bddg|eaca eage|dBgB ABcd|
+eaca e3g|dgBg Bddg|eaca eage|dBgB A2GF||`;
+        ABCJS.renderAbc(notationDiv, abcString);
+    </script>
+</body>
+
+</html>

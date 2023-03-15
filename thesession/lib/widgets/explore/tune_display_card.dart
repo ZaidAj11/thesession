@@ -1,7 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:thesession/models/tunes/tuneInfo.dart';
 import 'package:thesession/widgets/profile_icon.dart';
 import 'package:intl/intl.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class TuneCard extends StatefulWidget {
   final Post post;
@@ -13,6 +17,7 @@ class TuneCard extends StatefulWidget {
 
 class _TuneCardState extends State<TuneCard> {
   final DateFormat formatter = DateFormat('dd-MM-yyyy');
+  late WebViewController _controller;
 
   @override
   Widget build(BuildContext context) {
@@ -49,9 +54,23 @@ class _TuneCardState extends State<TuneCard> {
             ),
           ],
         ),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(15.0, 8, 8, 8),
-          child: Text(widget.post.abc),
+        Text(
+            widget.post.tuneInfo != null ? widget.post.tuneInfo!.name : 'Test'),
+        // Padding(
+        //   padding: const EdgeInsets.fromLTRB(15.0, 8, 8, 8),
+        //   child: Text(widget.post.abc),
+        // ),
+        Container(
+          width: 380,
+          height: 200,
+          child: WebView(
+            initialUrl: '',
+            javascriptMode: JavascriptMode.unrestricted,
+            onWebViewCreated: (WebViewController webViewController) {
+              _controller = webViewController;
+              _loadHtmlFromAssets();
+            },
+          ),
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -82,5 +101,12 @@ class _TuneCardState extends State<TuneCard> {
         ),
       ],
     );
+  }
+
+  _loadHtmlFromAssets() async {
+    String fileHtmlContents = await rootBundle.loadString('assets/abc.html');
+    _controller.loadUrl(Uri.dataFromString(fileHtmlContents,
+            mimeType: 'text/html', encoding: Encoding.getByName('utf-8'))
+        .toString());
   }
 }

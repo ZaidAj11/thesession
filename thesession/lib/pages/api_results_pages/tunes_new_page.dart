@@ -62,8 +62,7 @@ class _NewTunesPageState extends State<NewTunesPage> {
         "https://thesession.org/tunes/${tuneId}?format=json#setting'${settingId}");
     final response = await http.get(uri);
     final TuneInfo result = tuneInfoFromJson(response.body);
-
-    return result.posts.length > 0
+    Post newPost = result.posts.length > 0
         ? result.posts.firstWhere((i) => i.id == settingId)
         : Post(
             id: 0,
@@ -72,6 +71,8 @@ class _NewTunesPageState extends State<NewTunesPage> {
             abc: 'abc',
             member: Member(id: 0, name: 'name', url: 'url'),
             date: DateTime.now());
+    newPost.tuneInfo = result;
+    return newPost;
   }
 
   @override

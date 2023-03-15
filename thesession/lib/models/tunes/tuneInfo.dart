@@ -174,6 +174,7 @@ class Post {
   String abc;
   Member member;
   DateTime date;
+  TuneInfo? tuneInfo;
 
   factory Post.fromJson(Map<String, dynamic> json) => Post(
         id: json["id"],

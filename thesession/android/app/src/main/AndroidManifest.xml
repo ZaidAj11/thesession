@@ -3,7 +3,8 @@
    <application
         android:label="thesession"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"
+        android:usesCleartextTraffic="true">
                       <meta-data android:name="com.google.android.geo.API_KEY"
                android:value="AIzaSyBQT1i-Nbvw-UjtrX4H02GN6ME15FoJ6cQ"/>
         <activity
