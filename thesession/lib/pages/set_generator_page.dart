@@ -7,7 +7,7 @@ import 'package:thesession/widgets/explore/popular_tune_card.dart';
 import 'package:thesession/widgets/explore/tune_display_card.dart';
 import 'package:thesession/widgets/explore/tune_info_card.dart';
 import '../main.dart';
-import 'api_results_pages/tune_info_page.dart';
+import 'Tunes/tune_info_page.dart';
 
 class SetGeneratorPage extends StatefulWidget {
   const SetGeneratorPage({super.key});

@@ -2,15 +2,11 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:thesession/main.dart';
-import 'package:thesession/pages/api_results_pages/tunes_popular_page.dart';
-import 'package:thesession/pages/api_results_pages/tunes_recording_page.dart';
-import 'package:thesession/pages/search_page.dart';
 import 'package:thesession/widgets/side_drawer.dart';
 import '../widgets/my_appbar.dart';
-import 'api_results_pages/tunes_new_page.dart';
+import 'Tunes/tunes_new_page.dart';
+import 'Tunes/tunes_popular_page.dart';
+import 'Tunes/tunes_recording_page.dart';
 
 class ExplorePage extends StatefulWidget {
   const ExplorePage({Key? key}) : super(key: key);

@@ -4,7 +4,7 @@ import 'package:thesession/main.dart';
 import 'package:thesession/models/tunes/searchResult.dart';
 import 'package:http/http.dart' as http;
 
-import 'api_results_pages/tune_info_page.dart';
+import 'Tunes/tune_info_page.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
