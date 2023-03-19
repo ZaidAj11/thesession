@@ -46,6 +46,33 @@ class SideDrawer extends StatelessWidget {
                               content: 'Data Analytics',
                               trailingIcon: Icon(Icons.auto_graph),
                             ),
+                            Divider(
+                              thickness: 0.5,
+                            ),
+                            DrawerItem(
+                              doSomething: () => _navigateToDataPage(context),
+                              content: 'Set Generator',
+                              trailingIcon: Icon(Icons.collections),
+                            ),
+                            Divider(
+                              thickness: 0.5,
+                            ),
+                            DrawerItem(
+                              doSomething: () => _navigateToDataPage(context),
+                              content: 'My Likes',
+                              trailingIcon: Icon(Icons.favorite),
+                            ),
+                            Divider(
+                              thickness: 0.5,
+                            ),
+                            DrawerItem(
+                              doSomething: () => _navigateToDataPage(context),
+                              content: 'My Bookmarks',
+                              trailingIcon: Icon(Icons.bookmark),
+                            ),
+                            Divider(
+                              thickness: 0.5,
+                            ),
                           ],
                         ),
                         Expanded(

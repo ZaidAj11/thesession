@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:http/http.dart' as http;
+import 'package:thesession/pages/Tunes/post_page.dart';
 import 'package:thesession/widgets/explore/tune_display_card.dart';
 import '../../models/tunes/newTune.dart';
 
 import '../../models/tunes/tuneInfo.dart';
+import '../../utils/objects.dart';
 
 class NewTunesPage extends StatefulWidget {
   const NewTunesPage({Key? key}) : super(key: key);
@@ -100,7 +102,10 @@ class _NewTunesPageState extends State<NewTunesPage> {
         child: ListView.separated(
             itemBuilder: (context, index) {
               final Post newTune = newTunes[index];
-              return TuneCard(post: newTune);
+              return TuneCard(
+                post: newTune,
+                showFooter: true,
+              );
             },
             separatorBuilder: (context, index) => Container(
                   color: Colors.black,
@@ -109,18 +114,5 @@ class _NewTunesPageState extends State<NewTunesPage> {
             itemCount: newTunes.length),
       ),
     );
-  }
-
-  void _navigateToPost(BuildContext context, int indexOfItem) {
-    // Post item = newTunes[indexOfItem];
-    // Navigator.of(context).push(
-    //   MaterialPageRoute(
-    //     builder: (context) => TuneInfoPage(
-    //       tuneId: item.id.toString(),
-    //       settingId: item.id.toString(),
-    //       isNewTune: true,
-    //     ),
-    //   ),
-    // );
   }
 }

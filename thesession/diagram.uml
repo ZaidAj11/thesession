@@ -1,0 +1,1183 @@
+@startuml
+set namespaceSeparator ::
+
+class "thesession::auth::auth_page.dart::AuthPage" {
+  +State<AuthPage> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "thesession::auth::auth_page.dart::AuthPage"
+
+class "thesession::auth::auth_page.dart::_AuthPageState" {
+  +bool showLoginPage
+  +void toggleScreens()
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "thesession::auth::auth_page.dart::_AuthPageState"
+
+class "thesession::auth::main_page.dart::MainPage" {
+  +State<MainPage> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "thesession::auth::main_page.dart::MainPage"
+
+class "thesession::auth::main_page.dart::_MainPageState" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "thesession::auth::main_page.dart::_MainPageState"
+
+class "thesession::main.dart::MyApp" {
+  +Widget build()
+  {static} +bool checkIfDarkModeEnabled()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "thesession::main.dart::MyApp"
+
+class "thesession::main.dart::AppColours" {
+  {static} +Color DefaultDarkColour
+  {static} +Color DefaultWhiteColour
+}
+
+"thesession::main.dart::AppColours" o-- "dart::ui::Color"
+
+class "thesession::models::community::eventInfo.dart::EventInfo" {
+  +String format
+  +int id
+  +String name
+  +String url
+  +Member member
+  +DateTime date
+  +DateTime dtstart
+  +DateTime dtend
+  +double latitude
+  +double longitude
+  +Venue venue
+  +Area town
+  +Area area
+  +Area country
+  +List<Comment> comments
+  +Map<String, dynamic> toJson()
+}
+
+"thesession::models::community::eventInfo.dart::EventInfo" o-- "thesession::utils::objects.dart::Member"
+"thesession::models::community::eventInfo.dart::EventInfo" o-- "thesession::utils::objects.dart::Venue"
+"thesession::models::community::eventInfo.dart::EventInfo" o-- "thesession::utils::objects.dart::Area"
+
+class "thesession::models::community::newEvent.dart::NewEvent" {
+  +String format
+  +String perpage
+  +int pages
+  +int page
+  +int total
+  +List<Event> events
+  +Map<String, dynamic> toJson()
+}
+
+class "thesession::models::community::newEvent.dart::Event" {
+  +int id
+  +String name
+  +String url
+  +Member member
+  +DateTime date
+  +DateTime dtstart
+  +DateTime dtend
+  +Venue venue
+  +double? latitude
+  +double? longitude
+  +Area? town
+  +Area? area
+  +Area? country
+  +Map<String, dynamic> toJson()
+}
+
+"thesession::models::community::newEvent.dart::Event" o-- "thesession::utils::objects.dart::Member"
+"thesession::models::community::newEvent.dart::Event" o-- "thesession::utils::objects.dart::Venue"
+"thesession::models::community::newEvent.dart::Event" o-- "thesession::utils::objects.dart::Area"
+
+class "thesession::models::community::newSession.dart::NewSession" {
+  +String format
+  +int pages
+  +int page
+  +int total
+  +List<Session> sessions
+  +Map<String, dynamic> toJson()
+}
+
+class "thesession::models::community::newSession.dart::Session" {
+  +int id
+  +String url
+  +Member member
+  +DateTime date
+  +double latitude
+  +double longitude
+  +Venue venue
+  +Area town
+  +Area area
+  +Area country
+  +Map<String, dynamic> toJson()
+}
+
+"thesession::models::community::newSession.dart::Session" o-- "thesession::utils::objects.dart::Member"
+"thesession::models::community::newSession.dart::Session" o-- "thesession::utils::objects.dart::Venue"
+"thesession::models::community::newSession.dart::Session" o-- "thesession::utils::objects.dart::Area"
+
+class "thesession::models::community::sessionInfo.dart::SessionInfo" {
+  +String format
+  +int id
+  +String url
+  +Member member
+  +DateTime date
+  +double latitude
+  +double longitude
+  +Venue venue
+  +Area town
+  +Area area
+  +Area country
+  +List<String> schedule
+  +List<Comment> comments
+  +Map<String, dynamic> toJson()
+}
+
+"thesession::models::community::sessionInfo.dart::SessionInfo" o-- "thesession::utils::objects.dart::Member"
+"thesession::models::community::sessionInfo.dart::SessionInfo" o-- "thesession::utils::objects.dart::Venue"
+"thesession::models::community::sessionInfo.dart::SessionInfo" o-- "thesession::models::community::sessionInfo.dart::Area"
+
+class "thesession::models::community::sessionInfo.dart::Area" {
+  +int id
+  +String name
+  +Map<String, dynamic> toJson()
+}
+
+class "thesession::models::data_analytics::SessionData.dart::SessionDataDump" {
+  +List<SessionData> sessions
+  +Map<String, dynamic> toJson()
+}
+
+class "thesession::models::data_analytics::SessionData.dart::SessionData" {
+  +String id
+  +String name
+  +String address
+  +String town
+  +String area
+  +String country
+  +String latitude
+  +String longitude
+  +DateTime date
+  +Map<String, dynamic> toJson()
+}
+
+class "thesession::models::data_analytics::SetData.dart::SeDataDump" {
+  +List<Set> sets
+  +Map<String, dynamic> toJson()
+}
+
+class "thesession::models::data_analytics::SetData.dart::Set" {
+  +String tuneset
+  +DateTime date
+  +String memberId
+  +String username
+  +String settingorder
+  +String name
+  +String tuneId
+  +String settingId
+  +Type type
+  +Meter meter
+  +Mode mode
+  +String abc
+  +Map<String, dynamic> toJson()
+}
+
+"thesession::models::data_analytics::SetData.dart::Set" o-- "thesession::models::data_analytics::SetData.dart::Type"
+"thesession::models::data_analytics::SetData.dart::Set" o-- "thesession::models::data_analytics::SetData.dart::Meter"
+"thesession::models::data_analytics::SetData.dart::Set" o-- "thesession::models::data_analytics::SetData.dart::Mode"
+
+class "thesession::models::data_analytics::SetData.dart::EnumValues" {
+  +Map<String, T> map
+  +Map<T, String> reverseMap
+  +Map<T, String> reverse
+}
+
+class "thesession::models::data_analytics::SetData.dart::Meter" {
+  +int index
+  {static} +List<Meter> values
+  {static} +Meter THE_44
+  {static} +Meter THE_68
+  {static} +Meter THE_34
+  {static} +Meter THE_24
+  {static} +Meter THE_128
+  {static} +Meter THE_32
+  {static} +Meter THE_98
+}
+
+"thesession::models::data_analytics::SetData.dart::Meter" o-- "thesession::models::data_analytics::SetData.dart::Meter"
+"dart::core::Enum" <|-- "thesession::models::data_analytics::SetData.dart::Meter"
+
+class "thesession::models::data_analytics::SetData.dart::Mode" {
+  +int index
+  {static} +List<Mode> values
+  {static} +Mode EDORIAN
+  {static} +Mode GMAJOR
+  {static} +Mode DMAJOR
+  {static} +Mode AMIXOLYDIAN
+  {static} +Mode CMAJOR
+  {static} +Mode DMIXOLYDIAN
+  {static} +Mode EMINOR
+  {static} +Mode AMAJOR
+  {static} +Mode ADORIAN
+  {static} +Mode DMINOR
+  {static} +Mode FMAJOR
+  {static} +Mode DDORIAN
+  {static} +Mode GMIXOLYDIAN
+  {static} +Mode GDORIAN
+  {static} +Mode EMAJOR
+  {static} +Mode AMINOR
+  {static} +Mode BMINOR
+  {static} +Mode GMINOR
+  {static} +Mode BDORIAN
+  {static} +Mode FDORIAN
+  {static} +Mode EMIXOLYDIAN
+}
+
+"thesession::models::data_analytics::SetData.dart::Mode" o-- "thesession::models::data_analytics::SetData.dart::Mode"
+"dart::core::Enum" <|-- "thesession::models::data_analytics::SetData.dart::Mode"
+
+class "thesession::models::data_analytics::SetData.dart::Type" {
+  +int index
+  {static} +List<Type> values
+  {static} +Type REEL
+  {static} +Type JIG
+  {static} +Type WALTZ
+  {static} +Type MARCH
+  {static} +Type POLKA
+  {static} +Type HORNPIPE
+  {static} +Type SLIDE
+  {static} +Type THREE_TWO
+  {static} +Type MAZURKA
+  {static} +Type STRATHSPEY
+  {static} +Type SLIP_JIG
+  {static} +Type BARNDANCE
+}
+
+"thesession::models::data_analytics::SetData.dart::Type" o-- "thesession::models::data_analytics::SetData.dart::Type"
+"dart::core::Enum" <|-- "thesession::models::data_analytics::SetData.dart::Type"
+
+class "thesession::models::data_analytics::TuneData.dart::TuneDataDump" {
+  +List<TuneData> tunes
+  +Map<String, dynamic> toJson()
+}
+
+class "thesession::models::data_analytics::TuneData.dart::TuneData" {
+  +String tuneId
+  +String settingId
+  +String name
+  +Type type
+  +Meter meter
+  +Mode mode
+  +String abc
+  +DateTime? date
+  +String? username
+  +Map<String, dynamic> toJson()
+}
+
+"thesession::models::data_analytics::TuneData.dart::TuneData" o-- "thesession::models::data_analytics::TuneData.dart::Type"
+"thesession::models::data_analytics::TuneData.dart::TuneData" o-- "thesession::models::data_analytics::TuneData.dart::Meter"
+"thesession::models::data_analytics::TuneData.dart::TuneData" o-- "thesession::models::data_analytics::TuneData.dart::Mode"
+
+class "thesession::models::data_analytics::TuneData.dart::EnumValues" {
+  +Map<String, T> map
+  +Map<T, String> reverseMap
+  +Map<T, String> reverse
+}
+
+class "thesession::models::data_analytics::TuneData.dart::Meter" {
+  +int index
+  {static} +List<Meter> values
+  {static} +Meter THE_24
+  {static} +Meter THE_98
+  {static} +Meter THE_44
+  {static} +Meter THE_68
+  {static} +Meter THE_34
+  {static} +Meter THE_32
+  {static} +Meter THE_128
+}
+
+"thesession::models::data_analytics::TuneData.dart::Meter" o-- "thesession::models::data_analytics::TuneData.dart::Meter"
+"dart::core::Enum" <|-- "thesession::models::data_analytics::TuneData.dart::Meter"
+
+class "thesession::models::data_analytics::TuneData.dart::Mode" {
+  +int index
+  {static} +List<Mode> values
+  {static} +Mode GMAJOR
+  {static} +Mode BMINOR
+  {static} +Mode DMAJOR
+  {static} +Mode DDORIAN
+  {static} +Mode AMIXOLYDIAN
+  {static} +Mode EMINOR
+  {static} +Mode EDORIAN
+  {static} +Mode DMIXOLYDIAN
+  {static} +Mode EMAJOR
+  {static} +Mode ADORIAN
+  {static} +Mode GMINOR
+  {static} +Mode DMINOR
+  {static} +Mode FMAJOR
+  {static} +Mode AMAJOR
+  {static} +Mode GDORIAN
+  {static} +Mode AMINOR
+  {static} +Mode CMAJOR
+  {static} +Mode FDORIAN
+  {static} +Mode EMIXOLYDIAN
+  {static} +Mode BMIXOLYDIAN
+  {static} +Mode GMIXOLYDIAN
+  {static} +Mode CDORIAN
+  {static} +Mode BDORIAN
+}
+
+"thesession::models::data_analytics::TuneData.dart::Mode" o-- "thesession::models::data_analytics::TuneData.dart::Mode"
+"dart::core::Enum" <|-- "thesession::models::data_analytics::TuneData.dart::Mode"
+
+class "thesession::models::data_analytics::TuneData.dart::Type" {
+  +int index
+  {static} +List<Type> values
+  {static} +Type POLKA
+  {static} +Type SLIP_JIG
+  {static} +Type STRATHSPEY
+  {static} +Type REEL
+  {static} +Type JIG
+  {static} +Type WALTZ
+  {static} +Type MARCH
+  {static} +Type BARNDANCE
+  {static} +Type MAZURKA
+  {static} +Type THREE_TWO
+  {static} +Type HORNPIPE
+  {static} +Type SLIDE
+}
+
+"thesession::models::data_analytics::TuneData.dart::Type" o-- "thesession::models::data_analytics::TuneData.dart::Type"
+"dart::core::Enum" <|-- "thesession::models::data_analytics::TuneData.dart::Type"
+
+class "thesession::models::news::newsModel.dart::News" {
+  +int totalArticles
+  +List<Article> articles
+  +Map<String, dynamic> toJson()
+}
+
+class "thesession::models::news::newsModel.dart::Article" {
+  +String title
+  +String description
+  +String content
+  +String url
+  +String imageUrl
+  +DateTime publishedAt
+  +Source source
+  +Map<String, dynamic> toJson()
+}
+
+"thesession::models::news::newsModel.dart::Article" o-- "thesession::models::news::newsModel.dart::Source"
+
+class "thesession::models::news::newsModel.dart::Source" {
+  +String name
+  +String url
+  +Map<String, dynamic> toJson()
+}
+
+class "thesession::models::tunes::newTune.dart::NewTuneData" {
+  +String format
+  +String perpage
+  +int pages
+  +int page
+  +int total
+  +List<NewTune> settings
+  +Map<String, dynamic> toJson()
+}
+
+class "thesession::models::tunes::newTune.dart::NewTune" {
+  +int id
+  +String url
+  +String key
+  +Member member
+  +DateTime date
+  +Member tune
+  +Map<String, dynamic> toJson()
+}
+
+"thesession::models::tunes::newTune.dart::NewTune" o-- "thesession::models::tunes::tuneInfo.dart::Member"
+
+class "thesession::models::tunes::popularTune.dart::PopularTuneData" {
+  +String format
+  +String perpage
+  +int pages
+  +int page
+  +int total
+  +List<PopularTune> tunes
+  +Map<String, dynamic> toJson()
+}
+
+class "thesession::models::tunes::popularTune.dart::PopularTune" {
+  +int id
+  +String name
+  +String url
+  +Member member
+  +DateTime date
+  +String type
+  +int tunebooks
+  +Map<String, dynamic> toJson()
+}
+
+"thesession::models::tunes::popularTune.dart::PopularTune" o-- "thesession::models::tunes::popularTune.dart::Member"
+
+class "thesession::models::tunes::popularTune.dart::Member" {
+  +int id
+  +String name
+  +String url
+  +Map<String, dynamic> toJson()
+}
+
+class "thesession::models::tunes::recordingTune.dart::RecordingTuneData" {
+  +String format
+  +String perpage
+  +int pages
+  +int page
+  +int total
+  +List<Recording> tunes
+  +Map<String, dynamic> toJson()
+}
+
+class "thesession::models::tunes::recordingTune.dart::Recording" {
+  +int id
+  +String name
+  +String url
+  +Member member
+  +DateTime date
+  +String type
+  +Map<String, dynamic> toJson()
+}
+
+"thesession::models::tunes::recordingTune.dart::Recording" o-- "thesession::models::tunes::recordingTune.dart::Member"
+
+class "thesession::models::tunes::recordingTune.dart::Member" {
+  +int id
+  +String name
+  +String url
+  +Map<String, dynamic> toJson()
+}
+
+class "thesession::models::tunes::searchResult.dart::SearchResultTune" {
+  +String q
+  +String format
+  +int pages
+  +int page
+  +int total
+  +List<TuneFromSearchResult> tunes
+  +Map<String, dynamic> toJson()
+}
+
+class "thesession::models::tunes::searchResult.dart::TuneFromSearchResult" {
+  +int id
+  +String name
+  +String url
+  +Member member
+  +DateTime date
+  +String type
+  +Map<String, dynamic> toJson()
+}
+
+"thesession::models::tunes::searchResult.dart::TuneFromSearchResult" o-- "thesession::models::tunes::searchResult.dart::Member"
+
+class "thesession::models::tunes::searchResult.dart::Member" {
+  +int id
+  +String name
+  +String url
+  +Map<String, dynamic> toJson()
+}
+
+class "thesession::models::tunes::tuneInfo.dart::TuneInfo" {
+  +String format
+  +int id
+  +String name
+  +String url
+  +Member member
+  +DateTime? date
+  +String type
+  +int tunebooks
+  +int recordings
+  +int collections
+  +List<String> aliases
+  +List<Post> posts
+  +List<Comment> comments
+  +Map<String, dynamic> toJson()
+}
+
+"thesession::models::tunes::tuneInfo.dart::TuneInfo" o-- "thesession::models::tunes::tuneInfo.dart::Member"
+
+class "thesession::models::tunes::tuneInfo.dart::Comment" {
+  +int id
+  +String url
+  +String subject
+  +String content
+  +Member member
+  +DateTime date
+  +Map<String, dynamic> toJson()
+}
+
+"thesession::models::tunes::tuneInfo.dart::Comment" o-- "thesession::models::tunes::tuneInfo.dart::Member"
+
+class "thesession::models::tunes::tuneInfo.dart::Member" {
+  +int id
+  +String name
+  +String url
+  +Map<String, dynamic> toJson()
+}
+
+class "thesession::models::tunes::tuneInfo.dart::Post" {
+  +int id
+  +String url
+  +String key
+  +String abc
+  +Member member
+  +DateTime date
+  +TuneInfo? tuneInfo
+  +Map<String, dynamic> toJson()
+}
+
+"thesession::models::tunes::tuneInfo.dart::Post" o-- "thesession::models::tunes::tuneInfo.dart::Member"
+"thesession::models::tunes::tuneInfo.dart::Post" o-- "thesession::models::tunes::tuneInfo.dart::TuneInfo"
+
+class "thesession::pages::api_results_pages::events_new_page.dart::NewEventPage" {
+  +State<NewEventPage> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "thesession::pages::api_results_pages::events_new_page.dart::NewEventPage"
+
+class "thesession::pages::api_results_pages::events_new_page.dart::_NewEventPageState" {
+  +RefreshController refreshController
+  -bool _isFirstLoadRunning
+  -int _pageNum
+  -int _totalPages
+  +List<Event> newEvents
+  +Future<bool> GetData()
+  +Widget build()
+  -void _navigateToPost()
+}
+
+"thesession::pages::api_results_pages::events_new_page.dart::_NewEventPageState" o-- "pull_to_refresh::src::smart_refresher.dart::RefreshController"
+"flutter::src::widgets::framework.dart::State" <|-- "thesession::pages::api_results_pages::events_new_page.dart::_NewEventPageState"
+
+class "thesession::pages::api_results_pages::session_new_page.dart::NewSessionPage" {
+  +State<NewSessionPage> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "thesession::pages::api_results_pages::session_new_page.dart::NewSessionPage"
+
+class "thesession::pages::api_results_pages::session_new_page.dart::_NewSessionPageState" {
+  +RefreshController refreshController
+  -bool _isFirstLoadRunning
+  -int _pageNum
+  -int _totalPages
+  +List<Session> newSessions
+  +Future<bool> GetData()
+  +Widget build()
+  -void _navigateToPost()
+}
+
+"thesession::pages::api_results_pages::session_new_page.dart::_NewSessionPageState" o-- "pull_to_refresh::src::smart_refresher.dart::RefreshController"
+"flutter::src::widgets::framework.dart::State" <|-- "thesession::pages::api_results_pages::session_new_page.dart::_NewSessionPageState"
+
+class "thesession::pages::api_results_pages::tunes_new_page.dart::NewTunesPage" {
+  +State<NewTunesPage> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "thesession::pages::api_results_pages::tunes_new_page.dart::NewTunesPage"
+
+class "thesession::pages::api_results_pages::tunes_new_page.dart::_NewTunesPageState" {
+  +RefreshController refreshController
+  -bool _isFirstLoadRunning
+  -int _pageNum
+  -int _totalPages
+  +List<Post> newTunes
+  +Future<bool> GetData()
+  +Future<Post> getNewTune()
+  +Widget build()
+  -void _navigateToPost()
+}
+
+"thesession::pages::api_results_pages::tunes_new_page.dart::_NewTunesPageState" o-- "pull_to_refresh::src::smart_refresher.dart::RefreshController"
+"flutter::src::widgets::framework.dart::State" <|-- "thesession::pages::api_results_pages::tunes_new_page.dart::_NewTunesPageState"
+
+class "thesession::pages::api_results_pages::tunes_popular_page.dart::PopularTunesPage" {
+  +State<PopularTunesPage> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "thesession::pages::api_results_pages::tunes_popular_page.dart::PopularTunesPage"
+
+class "thesession::pages::api_results_pages::tunes_popular_page.dart::_PopularTunesPageState" {
+  +RefreshController refreshController
+  -bool _isFirstLoadRunning
+  -int _pageNum
+  -int _totalPages
+  +List<PopularTune> popularTunes
+  +Future<bool> GetData()
+  +Widget build()
+  -void _navigateToPost()
+}
+
+"thesession::pages::api_results_pages::tunes_popular_page.dart::_PopularTunesPageState" o-- "pull_to_refresh::src::smart_refresher.dart::RefreshController"
+"flutter::src::widgets::framework.dart::State" <|-- "thesession::pages::api_results_pages::tunes_popular_page.dart::_PopularTunesPageState"
+
+class "thesession::pages::api_results_pages::tunes_recording_page.dart::RecordingTunesPage" {
+  +State<RecordingTunesPage> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "thesession::pages::api_results_pages::tunes_recording_page.dart::RecordingTunesPage"
+
+class "thesession::pages::api_results_pages::tunes_recording_page.dart::_RecordingTunesPageState" {
+  +RefreshController refreshController
+  -bool _isFirstLoadRunning
+  -int _pageNum
+  -int _totalPages
+  -List<Recording> _recordings
+  +Future<bool> GetData()
+  +Widget build()
+  -void _navigateToPost()
+}
+
+"thesession::pages::api_results_pages::tunes_recording_page.dart::_RecordingTunesPageState" o-- "pull_to_refresh::src::smart_refresher.dart::RefreshController"
+"flutter::src::widgets::framework.dart::State" <|-- "thesession::pages::api_results_pages::tunes_recording_page.dart::_RecordingTunesPageState"
+
+class "thesession::pages::api_results_pages::tune_info_page.dart::TuneInfoPage" {
+  +String tuneId
+  +String settingId
+  +bool isNewTune
+  +State<TuneInfoPage> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "thesession::pages::api_results_pages::tune_info_page.dart::TuneInfoPage"
+
+class "thesession::pages::api_results_pages::tune_info_page.dart::_TuneInfoPageState" {
+  -List<Post> _posts
+  -String _title
+  +Future<bool> GetData()
+  +void initState()
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "thesession::pages::api_results_pages::tune_info_page.dart::_TuneInfoPageState"
+
+class "thesession::pages::community_page.dart::CommunityPage" {
+  +State<CommunityPage> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "thesession::pages::community_page.dart::CommunityPage"
+
+class "thesession::pages::community_page.dart::_CommunityPageState" {
+  +User? user
+  +Widget build()
+}
+
+"thesession::pages::community_page.dart::_CommunityPageState" o-- "firebase_auth::firebase_auth.dart::User"
+"flutter::src::widgets::framework.dart::State" <|-- "thesession::pages::community_page.dart::_CommunityPageState"
+
+class "thesession::pages::community_page.dart::CommunitySection" {
+  +dynamic view
+  +dynamic title
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "thesession::pages::community_page.dart::CommunitySection"
+
+class "thesession::pages::community_pages::event_info_page.dart::EventInfoPage" {
+  +Event event
+  {static} +DetailsCard getDetailsCardForEvent()
+  +State<EventInfoPage> createState()
+}
+
+"thesession::pages::community_pages::event_info_page.dart::EventInfoPage" o-- "thesession::models::community::newEvent.dart::Event"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "thesession::pages::community_pages::event_info_page.dart::EventInfoPage"
+
+class "thesession::pages::community_pages::event_info_page.dart::_EventInfoPageState" {
+  +List<Comment> comments
+  +Future<bool> GetData()
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "thesession::pages::community_pages::event_info_page.dart::_EventInfoPageState"
+
+class "thesession::pages::community_pages::session_info_page.dart::SessionInfoPage" {
+  +Session session
+  {static} +DetailsCard getDetailsCardForSession()
+  +State<SessionInfoPage> createState()
+}
+
+"thesession::pages::community_pages::session_info_page.dart::SessionInfoPage" o-- "thesession::models::community::newSession.dart::Session"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "thesession::pages::community_pages::session_info_page.dart::SessionInfoPage"
+
+class "thesession::pages::community_pages::session_info_page.dart::_SessionInfoPageState" {
+  +List<Comment> comments
+  +Future<bool> GetData()
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "thesession::pages::community_pages::session_info_page.dart::_SessionInfoPageState"
+
+class "thesession::pages::data_analytics::data_analytics_page.dart::DataAnalyticsPage" {
+  -dynamic _pages
+  +DataManager dataManager
+  +State<DataAnalyticsPage> createState()
+}
+
+"thesession::pages::data_analytics::data_analytics_page.dart::DataAnalyticsPage" o-- "thesession::utils::dataManager.dart::DataManager"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "thesession::pages::data_analytics::data_analytics_page.dart::DataAnalyticsPage"
+
+class "thesession::pages::data_analytics::data_analytics_page.dart::_DataAnalyticsPageState" {
+  -Map<String, int> _itemsMap
+  -List<String> _items
+  +int selectedIndex
+  -bool _isSearching
+  +String selectedItem
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "thesession::pages::data_analytics::data_analytics_page.dart::_DataAnalyticsPageState"
+
+class "thesession::pages::data_analytics::sessions_analytics_page.dart::SessionsAnalyticsPage" {
+  +DataManager dataManager
+  +State<SessionsAnalyticsPage> createState()
+}
+
+"thesession::pages::data_analytics::sessions_analytics_page.dart::SessionsAnalyticsPage" o-- "thesession::utils::dataManager.dart::DataManager"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "thesession::pages::data_analytics::sessions_analytics_page.dart::SessionsAnalyticsPage"
+
+class "thesession::pages::data_analytics::sessions_analytics_page.dart::_SessionsAnalyticsPageState" {
+  +List<ItemCountryData> sessionCountryData
+  +List<ItemCountryData> sessionCountyData
+  +User? user
+  +FirebaseFirestore db
+  +Future<bool> getData()
+  +Widget build()
+}
+
+"thesession::pages::data_analytics::sessions_analytics_page.dart::_SessionsAnalyticsPageState" o-- "firebase_auth::firebase_auth.dart::User"
+"thesession::pages::data_analytics::sessions_analytics_page.dart::_SessionsAnalyticsPageState" o-- "cloud_firestore::cloud_firestore.dart::FirebaseFirestore"
+"flutter::src::widgets::framework.dart::State" <|-- "thesession::pages::data_analytics::sessions_analytics_page.dart::_SessionsAnalyticsPageState"
+
+class "thesession::pages::data_analytics::tunes_analytics_page.dart::TunesAnalyticsPage" {
+  +DataManager dataManager
+  +State<TunesAnalyticsPage> createState()
+}
+
+"thesession::pages::data_analytics::tunes_analytics_page.dart::TunesAnalyticsPage" o-- "thesession::utils::dataManager.dart::DataManager"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "thesession::pages::data_analytics::tunes_analytics_page.dart::TunesAnalyticsPage"
+
+class "thesession::pages::data_analytics::tunes_analytics_page.dart::_TunesAnalyticsPageState" {
+  +List<ItemCountryData> tuneData
+  +List<ItemCountryData> tuneSetsData
+  +List<ItemCountryData> tuneYearsData
+  +Future<bool> getData()
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "thesession::pages::data_analytics::tunes_analytics_page.dart::_TunesAnalyticsPageState"
+
+class "thesession::pages::explore_page.dart::ExplorePage" {
+  +State<ExplorePage> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "thesession::pages::explore_page.dart::ExplorePage"
+
+class "thesession::pages::explore_page.dart::_ExplorePageState" {
+  -Map<String, int> _itemsMap
+  -List<String> _items
+  -List<StatefulWidget> _pages
+  +User? user
+  +int selectedIndex
+  -bool _isSearching
+  +StatefulWidget curPage
+  +String selectedItem
+  +Widget build()
+}
+
+"thesession::pages::explore_page.dart::_ExplorePageState" o-- "firebase_auth::firebase_auth.dart::User"
+"thesession::pages::explore_page.dart::_ExplorePageState" o-- "flutter::src::widgets::framework.dart::StatefulWidget"
+"flutter::src::widgets::framework.dart::State" <|-- "thesession::pages::explore_page.dart::_ExplorePageState"
+
+class "thesession::pages::home_page.dart::HomePage" {
+  +State<HomePage> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "thesession::pages::home_page.dart::HomePage"
+
+class "thesession::pages::home_page.dart::_HomePageState" {
+  -int _selectedIndex
+  -List<Widget> _pages
+  -List<String> _titles
+  -void _navigateBottomBar()
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "thesession::pages::home_page.dart::_HomePageState"
+
+class "thesession::pages::login_page.dart::LoginPage" {
+  +void Function() showRegisterPage
+  +State<LoginPage> createState()
+}
+
+"thesession::pages::login_page.dart::LoginPage" o-- "dart::ui::void Function()"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "thesession::pages::login_page.dart::LoginPage"
+
+class "thesession::pages::login_page.dart::_LoginPageState" {
+  -TextEditingController _emailController
+  -TextEditingController _passwordController
+  -FocusNode _focusNode
+  +Future<dynamic> signIn()
+  +void showSnackBar()
+  +void dispose()
+  +Widget build()
+}
+
+"thesession::pages::login_page.dart::_LoginPageState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"thesession::pages::login_page.dart::_LoginPageState" o-- "flutter::src::widgets::focus_manager.dart::FocusNode"
+"flutter::src::widgets::framework.dart::State" <|-- "thesession::pages::login_page.dart::_LoginPageState"
+
+class "thesession::pages::news::news_article_page.dart::NewsArticlePage" {
+  +Article article
+  +Widget build()
+  -Future<void> _launchUrl()
+}
+
+"thesession::pages::news::news_article_page.dart::NewsArticlePage" o-- "thesession::models::news::newsModel.dart::Article"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "thesession::pages::news::news_article_page.dart::NewsArticlePage"
+
+class "thesession::pages::news::news_page.dart::NewsPage" {
+  +String API_KEY
+  +State<NewsPage> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "thesession::pages::news::news_page.dart::NewsPage"
+
+class "thesession::pages::news::news_page.dart::_NewsPageState" {
+  +User? user
+  +RefreshController refreshController
+  -bool _isFirstLoadRunning
+  -int _pageNum
+  -int _totalPages
+  +List<Article> articles
+  +Future<bool> GetData()
+  +Widget build()
+  -void _navigateToPost()
+}
+
+"thesession::pages::news::news_page.dart::_NewsPageState" o-- "firebase_auth::firebase_auth.dart::User"
+"thesession::pages::news::news_page.dart::_NewsPageState" o-- "pull_to_refresh::src::smart_refresher.dart::RefreshController"
+"flutter::src::widgets::framework.dart::State" <|-- "thesession::pages::news::news_page.dart::_NewsPageState"
+
+class "thesession::pages::profile_page.dart::ProfilePage" {
+  +State<ProfilePage> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "thesession::pages::profile_page.dart::ProfilePage"
+
+class "thesession::pages::profile_page.dart::_ProfilePageState" {
+  +User? user
+  -int _selectedIndex
+  +void signOut()
+  +Widget build()
+}
+
+"thesession::pages::profile_page.dart::_ProfilePageState" o-- "firebase_auth::firebase_auth.dart::User"
+"flutter::src::widgets::framework.dart::State" <|-- "thesession::pages::profile_page.dart::_ProfilePageState"
+
+class "thesession::pages::register_page.dart::RegisterPage" {
+  +void Function() showLoginPage
+  +State<RegisterPage> createState()
+}
+
+"thesession::pages::register_page.dart::RegisterPage" o-- "dart::ui::void Function()"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "thesession::pages::register_page.dart::RegisterPage"
+
+class "thesession::pages::register_page.dart::_RegisterPageState" {
+  -TextEditingController _displayNameController
+  -TextEditingController _firstNameController
+  -TextEditingController _surnameController
+  -TextEditingController _emailController
+  -TextEditingController _passwordController
+  -TextEditingController _confirmPasswordController
+  +Future<dynamic> signUp()
+  +Future<dynamic> addUserDetails()
+  +void showSnackBar()
+  +Widget build()
+}
+
+"thesession::pages::register_page.dart::_RegisterPageState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"flutter::src::widgets::framework.dart::State" <|-- "thesession::pages::register_page.dart::_RegisterPageState"
+
+class "thesession::pages::search_page.dart::SearchPage" {
+  +State<SearchPage> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "thesession::pages::search_page.dart::SearchPage"
+
+class "thesession::pages::search_page.dart::_SearchPageState" {
+  -TextEditingController _searchController
+  +String query
+  +List<TuneFromSearchResult> searchResults
+  +Future<bool> GetData()
+  +Widget build()
+  -void _navigateToPost()
+}
+
+"thesession::pages::search_page.dart::_SearchPageState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"flutter::src::widgets::framework.dart::State" <|-- "thesession::pages::search_page.dart::_SearchPageState"
+
+class "thesession::utils::countryCodeGenerator.dart::CountryCodeGenerator" {
+  {static} +Map<dynamic, dynamic> countryCodes
+}
+
+class "thesession::utils::dataManager.dart::DataManager" {
+  +FirebaseFirestore db
+  +Random math
+  -List<SessionData> _sessionData
+  -List<TuneData> _tuneData
+  +Future<List<ItemCountryData>> getTuneSetSections()
+  +Future<List<ItemCountryData>> getTuneToDateSections()
+  +Future<List<ItemCountryData>> getTuneToTypeSections()
+  +Future<List<ItemCountryData>> getSessionToCountrySections()
+  +Future<List<ItemCountryData>> getSessionToCountySections()
+  +Future<bool> setTuneSetsData()
+  +Future<bool> setTuneData()
+  +Future<bool> setSessionData()
+}
+
+"thesession::utils::dataManager.dart::DataManager" o-- "cloud_firestore::cloud_firestore.dart::FirebaseFirestore"
+"thesession::utils::dataManager.dart::DataManager" o-- "dart::math::Random"
+
+class "thesession::utils::dataManager.dart::ItemCountryData" {
+  +String item
+  +int count
+  +Color color
+}
+
+"thesession::utils::dataManager.dart::ItemCountryData" o-- "dart::ui::Color"
+
+class "thesession::utils::geoLocator.dart::GeoLocator" {
+  {static} +Future<String> getAddress()
+}
+
+class "thesession::utils::objects.dart::Area" {
+  +int id
+  +String name
+  +Map<String, dynamic> toJson()
+}
+
+class "thesession::utils::objects.dart::Comment" {
+  +int id
+  +String url
+  +String subject
+  +String content
+  +Member member
+  +DateTime date
+  +Map<String, dynamic> toJson()
+}
+
+"thesession::utils::objects.dart::Comment" o-- "thesession::utils::objects.dart::Member"
+
+class "thesession::utils::objects.dart::Member" {
+  +int id
+  +String name
+  +String url
+  +Map<String, dynamic> toJson()
+}
+
+class "thesession::utils::objects.dart::Venue" {
+  +int id
+  +String name
+  +String telephone
+  +String email
+  +String web
+  +Map<String, dynamic> toJson()
+}
+
+class "thesession::widgets::community::comment_card.dart::CommentCard" {
+  +Member member
+  +Comment comment
+  +DateFormat formatter
+  +Widget build()
+}
+
+"thesession::widgets::community::comment_card.dart::CommentCard" o-- "thesession::utils::objects.dart::Member"
+"thesession::widgets::community::comment_card.dart::CommentCard" o-- "thesession::utils::objects.dart::Comment"
+"thesession::widgets::community::comment_card.dart::CommentCard" o-- "intl::src::intl::date_format.dart::DateFormat"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "thesession::widgets::community::comment_card.dart::CommentCard"
+
+class "thesession::widgets::community::details_card.dart::DetailsCard" {
+  +String where
+  +String createdBy
+  +String venue
+  +Area? area
+  +Area? town
+  +Area? country
+  +DateTime date
+  +Widget build()
+}
+
+"thesession::widgets::community::details_card.dart::DetailsCard" o-- "thesession::utils::objects.dart::Area"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "thesession::widgets::community::details_card.dart::DetailsCard"
+
+class "thesession::widgets::community::event_display_card.dart::EventCard" {
+  +Event event
+  +String address
+  +State<EventCard> createState()
+}
+
+"thesession::widgets::community::event_display_card.dart::EventCard" o-- "thesession::models::community::newEvent.dart::Event"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "thesession::widgets::community::event_display_card.dart::EventCard"
+
+class "thesession::widgets::community::event_display_card.dart::_EventCardState" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "thesession::widgets::community::event_display_card.dart::_EventCardState"
+
+class "thesession::widgets::community::session_display_card.dart::SessionCard" {
+  +Session session
+  +String address
+  +State<SessionCard> createState()
+}
+
+"thesession::widgets::community::session_display_card.dart::SessionCard" o-- "thesession::models::community::newSession.dart::Session"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "thesession::widgets::community::session_display_card.dart::SessionCard"
+
+class "thesession::widgets::community::session_display_card.dart::_SessionCardState" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "thesession::widgets::community::session_display_card.dart::_SessionCardState"
+
+class "thesession::widgets::explore::popular_tune_card.dart::PopularTuneCard" {
+  +PopularTune popTune
+  {static} +DateFormat formatter
+  {static} +List<Widget> icons
+  +Widget build()
+  -Future<void> _launchUrl()
+}
+
+"thesession::widgets::explore::popular_tune_card.dart::PopularTuneCard" o-- "thesession::models::tunes::popularTune.dart::PopularTune"
+"thesession::widgets::explore::popular_tune_card.dart::PopularTuneCard" o-- "intl::src::intl::date_format.dart::DateFormat"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "thesession::widgets::explore::popular_tune_card.dart::PopularTuneCard"
+
+class "thesession::widgets::explore::popular_tune_card.dart::MusicNotes" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "thesession::widgets::explore::popular_tune_card.dart::MusicNotes"
+
+class "thesession::widgets::explore::recording_tune.dart::RecordingTuneCard" {
+  +Recording recording
+  {static} +DateFormat formatter
+  {static} +List<Widget> icons
+  +Widget build()
+  -Future<void> _launchUrl()
+}
+
+"thesession::widgets::explore::recording_tune.dart::RecordingTuneCard" o-- "thesession::models::tunes::recordingTune.dart::Recording"
+"thesession::widgets::explore::recording_tune.dart::RecordingTuneCard" o-- "intl::src::intl::date_format.dart::DateFormat"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "thesession::widgets::explore::recording_tune.dart::RecordingTuneCard"
+
+class "thesession::widgets::explore::recording_tune.dart::MusicNotes" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "thesession::widgets::explore::recording_tune.dart::MusicNotes"
+
+class "thesession::widgets::explore::tune_display_card.dart::TuneCard" {
+  +Post post
+  +State<TuneCard> createState()
+}
+
+"thesession::widgets::explore::tune_display_card.dart::TuneCard" o-- "thesession::models::tunes::tuneInfo.dart::Post"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "thesession::widgets::explore::tune_display_card.dart::TuneCard"
+
+class "thesession::widgets::explore::tune_display_card.dart::_TuneCardState" {
+  +DateFormat formatter
+  -WebViewController _controller
+  +Widget build()
+  -dynamic _loadHtmlFromAssets()
+}
+
+"thesession::widgets::explore::tune_display_card.dart::_TuneCardState" o-- "intl::src::intl::date_format.dart::DateFormat"
+"thesession::widgets::explore::tune_display_card.dart::_TuneCardState" o-- "webview_flutter::src::webview.dart::WebViewController"
+"flutter::src::widgets::framework.dart::State" <|-- "thesession::widgets::explore::tune_display_card.dart::_TuneCardState"
+
+class "thesession::widgets::my_appbar.dart::MyAppBar" {
+  +Widget dropdown
+  +bool useSearch
+  +Size preferredSize
+  +State<MyAppBar> createState()
+}
+
+"thesession::widgets::my_appbar.dart::MyAppBar" o-- "flutter::src::widgets::framework.dart::Widget"
+"thesession::widgets::my_appbar.dart::MyAppBar" o-- "dart::ui::Size"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "thesession::widgets::my_appbar.dart::MyAppBar"
+"flutter::src::widgets::preferred_size.dart::PreferredSizeWidget" <|-- "thesession::widgets::my_appbar.dart::MyAppBar"
+
+class "thesession::widgets::my_appbar.dart::_MyAppBarState" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "thesession::widgets::my_appbar.dart::_MyAppBarState"
+
+class "thesession::widgets::news::news_article_card.dart::NewsArticleCard" {
+  +Image image
+  +Article article
+  +Widget build()
+}
+
+"thesession::widgets::news::news_article_card.dart::NewsArticleCard" o-- "flutter::src::widgets::image.dart::Image"
+"thesession::widgets::news::news_article_card.dart::NewsArticleCard" o-- "thesession::models::news::newsModel.dart::Article"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "thesession::widgets::news::news_article_card.dart::NewsArticleCard"
+
+class "thesession::widgets::profile_icon.dart::ProfileIcon" {
+  +String username
+  +Random rng
+  +Widget build()
+  +String getInitials()
+}
+
+"thesession::widgets::profile_icon.dart::ProfileIcon" o-- "dart::math::Random"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "thesession::widgets::profile_icon.dart::ProfileIcon"
+
+class "thesession::widgets::search_modal.dart::SearchModal" {
+  +TextEditingController textFieldController
+  +State<SearchModal> createState()
+}
+
+"thesession::widgets::search_modal.dart::SearchModal" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "thesession::widgets::search_modal.dart::SearchModal"
+
+class "thesession::widgets::search_modal.dart::_SearchModalState" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "thesession::widgets::search_modal.dart::_SearchModalState"
+
+class "thesession::widgets::side_drawer.dart::SideDrawer" {
+  +dynamic userName
+  +void signOut()
+  +Widget build()
+  -void _navigateToDataPage()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "thesession::widgets::side_drawer.dart::SideDrawer"
+
+class "thesession::widgets::side_drawer.dart::DrawerItem" {
+  +void Function() doSomething
+  +String content
+  +Icon trailingIcon
+  +Widget build()
+}
+
+"thesession::widgets::side_drawer.dart::DrawerItem" o-- "dart::ui::void Function()"
+"thesession::widgets::side_drawer.dart::DrawerItem" o-- "flutter::src::widgets::icon.dart::Icon"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "thesession::widgets::side_drawer.dart::DrawerItem"
+
+
+@enduml

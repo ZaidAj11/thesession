@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import '../../utils/objects.dart';
+
 TuneInfo tuneInfoFromJson(String str) {
   try {
     return TuneInfo.fromJson(json.decode(str));
@@ -89,72 +91,6 @@ class TuneInfo {
         "aliases": List<dynamic>.from(aliases.map((x) => x)),
         "settings": List<dynamic>.from(posts.map((x) => x.toJson())),
         "comments": List<dynamic>.from(comments.map((x) => x.toJson())),
-      };
-}
-
-class Comment {
-  Comment({
-    required this.id,
-    required this.url,
-    required this.subject,
-    required this.content,
-    required this.member,
-    required this.date,
-  });
-
-  int id;
-  String url;
-  String subject;
-  String content;
-  Member member;
-  DateTime date;
-
-  factory Comment.fromJson(Map<String, dynamic> json) => Comment(
-        id: json["id"],
-        url: json["url"],
-        subject: json["subject"],
-        content: json["content"],
-        member: Member.fromJson(json["member"]),
-        date: DateTime.parse(json["date"]),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "url": url,
-        "subject": subject,
-        "content": content,
-        "member": member.toJson(),
-        "date": date.toIso8601String(),
-      };
-}
-
-class Member {
-  Member({
-    required this.id,
-    required this.name,
-    required this.url,
-  });
-
-  int id;
-  String name;
-  String url;
-
-  factory Member.fromJson(Map<String, dynamic> json) {
-    try {
-      return Member(
-        id: json["id"],
-        name: json["name"],
-        url: json["url"],
-      );
-    } catch (Exception) {
-      return new Member(id: 1, name: 'Empty', url: 'Empty');
-    }
-  }
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-        "url": url,
       };
 }
 

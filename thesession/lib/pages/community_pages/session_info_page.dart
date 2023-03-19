@@ -80,11 +80,13 @@ class _SessionInfoPageState extends State<SessionInfoPage> {
             const SizedBox(
               height: 15,
             ),
-            const Text(
-              "Details",
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SessionInfoPage.getDetailsCardForSession(widget.session),
             ),
-            SessionInfoPage.getDetailsCardForSession(widget.session),
+            Divider(
+              thickness: 2,
+            ),
             const Text(
               "Comments",
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),

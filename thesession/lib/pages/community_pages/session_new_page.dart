@@ -1,25 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:http/http.dart' as http;
-import 'package:thesession/widgets/community/event_display_card.dart';
-import '../../models/community/newEvent.dart';
-import '../community_pages/event_info_page.dart';
+import 'package:thesession/pages/api_results_pages/tune_info_page.dart';
+import 'package:thesession/widgets/community/session_display_card.dart';
+import '../../models/community/newSession.dart';
+import 'session_info_page.dart';
 
-class NewEventPage extends StatefulWidget {
-  const NewEventPage({super.key});
+class NewSessionPage extends StatefulWidget {
+  const NewSessionPage({Key? key}) : super(key: key);
 
   @override
-  State<NewEventPage> createState() => _NewEventPageState();
+  State<NewSessionPage> createState() => _NewSessionPageState();
 }
 
-class _NewEventPageState extends State<NewEventPage> {
+class _NewSessionPageState extends State<NewSessionPage> {
   final RefreshController refreshController =
       RefreshController(initialRefresh: true);
   bool _isFirstLoadRunning = false;
   int _pageNum = 1;
   late int _totalPages;
 
-  List<Event> newEvents = [];
+  List<Session> newSessions = [];
 
   Future<bool> GetData({bool isRefresh = false}) async {
     if (isRefresh) {
@@ -31,15 +32,15 @@ class _NewEventPageState extends State<NewEventPage> {
       }
     }
     Uri uri = Uri.parse(
-        'https://thesession.org/events/new?format=json&perpage=20&page=${_pageNum}');
+        'https://thesession.org/sessions/new?format=json&perpage=20&page=${_pageNum}');
     final response = await http.get(uri);
 
     if (response.statusCode == 200) {
-      final result = newEventFromJson(response.body);
+      final result = newSessionsFromJson(response.body);
       if (!isRefresh) {
-        newEvents.addAll(result.events);
+        newSessions.addAll(result.sessions);
       } else {
-        newEvents = result.events;
+        newSessions = result.sessions;
       }
       _pageNum++;
       _totalPages = result.pages;
@@ -74,31 +75,29 @@ class _NewEventPageState extends State<NewEventPage> {
       child: ListView.separated(
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, index) {
-            final event = newEvents[index];
+            final session = newSessions[index];
             return Padding(
               padding: const EdgeInsets.all(8.0),
               child: GestureDetector(
                 onTap: () {
                   _navigateToPost(context, index);
                 },
-                child: EventCard(event: event, address: "Test"),
+                child: SessionCard(session: session, address: "Test"),
               ),
             );
           },
           separatorBuilder: (context, index) => Divider(
                 height: 1,
               ),
-          itemCount: newEvents.length),
+          itemCount: newSessions.length),
     );
   }
 
   void _navigateToPost(BuildContext context, int indexOfItem) {
-    var item = newEvents[indexOfItem];
+    Session item = newSessions[indexOfItem];
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => EventInfoPage(
-          event: item,
-        ),
+        builder: (context) => SessionInfoPage(session: item),
       ),
     );
   }

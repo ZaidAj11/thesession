@@ -27,12 +27,13 @@ class _SessionCardState extends State<SessionCard> {
           borderRadius: BorderRadius.circular(20)
           //color: Colors.grey[400],
           ),
+      width: 350,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Padding(
                 padding: const EdgeInsets.fromLTRB(8, 8, 0, 0),
@@ -48,12 +49,15 @@ class _SessionCardState extends State<SessionCard> {
                 child: Text(
                   widget.session.venue.name,
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                  overflow: TextOverflow.clip,
                 ),
               ),
             ],
           ),
-          Expanded(
-              child: SessionInfoPage.getDetailsCardForSession(widget.session)),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(8.0, 8, 8, 0),
+            child: SessionInfoPage.getDetailsCardForSession(widget.session),
+          ),
         ],
       ),
     );

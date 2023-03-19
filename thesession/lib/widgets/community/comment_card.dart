@@ -47,6 +47,9 @@ class CommentCard extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(15.0, 8, 8, 8),
           child: Text(comment.content),
         ),
+        Divider(
+          thickness: 0.5,
+        ),
       ],
     );
   }

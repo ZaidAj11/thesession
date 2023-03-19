@@ -78,8 +78,11 @@ class _RecordingTunesPageState extends State<RecordingTunesPage> {
         child: ListView.separated(
             itemBuilder: (context, index) {
               final recording = _recordings[index];
-              return RecordingTuneCard(
-                recording: recording,
+              return GestureDetector(
+                onTap: () => _navigateToPost(context, index),
+                child: RecordingTuneCard(
+                  recording: recording,
+                ),
               );
             },
             separatorBuilder: (context, index) => Divider(

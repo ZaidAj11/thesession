@@ -4,6 +4,7 @@
 
 import 'dart:convert';
 
+import '../../utils/objects.dart';
 import 'tuneInfo.dart';
 
 NewTuneData newTuneDataFromJson(String str) =>

@@ -24,12 +24,13 @@ class DetailsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              "Created by:",
+              "Created by: ",
               style: TextStyle(fontWeight: FontWeight.w500),
             ),
             Text(createdBy)
@@ -39,7 +40,7 @@ class DetailsCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              "Venue:",
+              "Venue: ",
               style: TextStyle(fontWeight: FontWeight.w500),
             ),
             Text(venue),
@@ -49,7 +50,7 @@ class DetailsCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              "Where:",
+              "Where: ",
               style: TextStyle(fontWeight: FontWeight.w500),
             ),
             Text("${area!.name},\n${town!.name},\n${country!.name}"),
@@ -60,10 +61,10 @@ class DetailsCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              "When:",
+              "When: ",
               style: TextStyle(fontWeight: FontWeight.w500),
             ),
-            Text(date.toIso8601String()),
+            Text(date.toIso8601String().split('T')[0]),
           ],
         ),
       ],

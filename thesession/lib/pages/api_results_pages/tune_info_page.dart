@@ -22,12 +22,14 @@ class TuneInfoPage extends StatefulWidget {
 class _TuneInfoPageState extends State<TuneInfoPage> {
   List<Post> _posts = [];
   String _title = '';
+  late TuneInfo _tuneInfo;
   Future<bool> GetData() async {
     Uri uri = Uri.parse(
         "https://thesession.org/tunes/${widget.tuneId}?format=json${widget.isNewTune ? '#setting' + widget.settingId : ''}");
     final response = await http.get(uri);
     if (response.statusCode == 200) {
       final TuneInfo result = tuneInfoFromJson(response.body);
+      _tuneInfo = result;
       _title = result.name;
       _posts.addAll(result.posts);
       setState(() {});
@@ -53,8 +55,10 @@ class _TuneInfoPageState extends State<TuneInfoPage> {
       body: ListView.separated(
           itemBuilder: (context, index) {
             final post = _posts[index];
+            post.tuneInfo = _tuneInfo;
             return TuneCard(
               post: post,
+              showFooter: true,
             );
           },
           separatorBuilder: (context, index) => Divider(),

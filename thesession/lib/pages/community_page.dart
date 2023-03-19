@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:thesession/pages/api_results_pages/session_new_page.dart';
+import 'package:thesession/pages/community_pages/session_new_page.dart';
 import 'package:thesession/widgets/side_drawer.dart';
 
 import '../widgets/my_appbar.dart';
-import 'api_results_pages/events_new_page.dart';
+import 'community_pages/events_new_page.dart';
 
 class CommunityPage extends StatefulWidget {
   const CommunityPage({Key? key}) : super(key: key);
