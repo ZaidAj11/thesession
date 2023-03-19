@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:thesession/pages/data_analytics/data_analytics_page.dart';
+import 'package:thesession/pages/set_generator_page.dart';
 import 'package:thesession/widgets/profile_icon.dart';
 
 class SideDrawer extends StatelessWidget {
@@ -50,7 +51,8 @@ class SideDrawer extends StatelessWidget {
                               thickness: 0.5,
                             ),
                             DrawerItem(
-                              doSomething: () => _navigateToDataPage(context),
+                              doSomething: () =>
+                                  _navigateToSetGeneratorPage(context),
                               content: 'Set Generator',
                               trailingIcon: Icon(Icons.collections),
                             ),
@@ -98,6 +100,14 @@ class SideDrawer extends StatelessWidget {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => DataAnalyticsPage(),
+      ),
+    );
+  }
+
+  void _navigateToSetGeneratorPage(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => SetGeneratorPage(),
       ),
     );
   }
