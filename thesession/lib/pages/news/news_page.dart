@@ -5,7 +5,6 @@ import 'package:http/http.dart' as http;
 import 'package:thesession/models/news/newsModel.dart';
 import 'package:thesession/models/tunes/popularTune.dart';
 import 'package:thesession/main.dart';
-import 'package:thesession/pages/api_results_pages/tune_info_page.dart';
 import 'package:thesession/pages/news/news_article_page.dart';
 import 'package:thesession/widgets/my_appbar.dart';
 import 'package:thesession/widgets/news/news_article_card.dart';
