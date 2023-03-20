@@ -21,17 +21,26 @@ class FireStoreService {
     return isReady;
   }
 
-  _getCurrentUserDocs() {}
+  static bool checkIfLiked(int tuneId, int settingId) {
+    if (LikesMap.containsKey(tuneId.toString())) {
+      var likedSettings = LikesMap[tuneId.toString()] as List<dynamic>;
+      if (likedSettings.contains(settingId)) return true;
+    }
+    return false;
+  }
 
-  static Future likePost(int tuneId, int settingId) async {
-    var settingIds = LikesMap[tuneId.toString()] as List<dynamic>;
+  static likePost(int tuneId, int settingId) async {
+    if (!LikesMap.containsKey(tuneId.toString())) {
+      LikesMap[tuneId.toString()] = [settingId];
+    } else {
+      var settingIds = LikesMap[tuneId.toString()] as List<dynamic>;
+      if (settingIds.contains(settingId))
+        settingIds.remove(settingId);
+      else
+        settingIds.add(settingId);
 
-    if (settingIds.contains(settingId))
-      settingIds.remove(settingId);
-    else
-      settingIds.add(settingId);
-
-    LikesMap[tuneId.toString()] = settingIds;
+      LikesMap[tuneId.toString()] = settingIds;
+    }
     var docRef = _db.collection('users').doc(user!.uid);
     bool isReady = await docRef.get().then(
       (DocumentSnapshot doc) {

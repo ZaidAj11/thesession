@@ -54,6 +54,7 @@ class _TuneCardState extends State<TuneCard> {
   final DateFormat formatter = DateFormat('dd-MM-yyyy');
   late WebViewController _controller;
   late Container webView;
+  bool isLiked = false;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -104,7 +105,18 @@ class _TuneCardState extends State<TuneCard> {
                   Wrap(
                     children: [
                       GestureDetector(
-                          onTap: () => likePost(), child: getLikeIcon()),
+                          onTap: () => likePost(),
+                          child: FutureBuilder(
+                              future: FireStoreService.getLikedTunes(),
+                              builder: ((context, snapshot) {
+                                if (snapshot.hasData)
+                                  return getLikeIcon();
+                                else
+                                  return SizedBox(
+                                      height: 20,
+                                      width: 20,
+                                      child: LinearProgressIndicator());
+                              }))),
                       SizedBox(
                         width: 2,
                       ),
@@ -123,7 +135,10 @@ class _TuneCardState extends State<TuneCard> {
   }
 
   Icon getLikeIcon() {
-    if (widget.isLiked != null && widget.isLiked!)
+    isLiked =
+        FireStoreService.checkIfLiked(widget.post.tuneInfo!.id, widget.post.id);
+
+    if (isLiked)
       return Icon(
         Icons.favorite,
         size: 28,
@@ -136,13 +151,10 @@ class _TuneCardState extends State<TuneCard> {
       );
   }
 
-  void likePost() {
-    FireStoreService.likePost(widget.post.tuneInfo!.id, widget.post.id);
+  void likePost() async {
+    await FireStoreService.likePost(widget.post.tuneInfo!.id, widget.post.id);
     setState(() {
-      if (widget != null)
-        widget.isLiked = !widget.isLiked!;
-      else
-        widget.isLiked = true;
+      isLiked = !isLiked;
     });
   }
 
@@ -156,9 +168,5 @@ class _TuneCardState extends State<TuneCard> {
         ),
       ),
     );
-  }
-
-  void _likePost() {
-    FireStoreService.likePost(widget.post.tuneInfo!.id, widget.post.id);
   }
 }
