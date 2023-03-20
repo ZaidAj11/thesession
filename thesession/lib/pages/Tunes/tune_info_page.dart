@@ -2,17 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:thesession/main.dart';
 import 'package:thesession/models/tunes/tuneInfo.dart';
-import 'package:thesession/widgets/explore/tune_display_card.dart';
+import 'package:thesession/widgets/explore/setting_display_card.dart';
 
 class TuneInfoPage extends StatefulWidget {
   final String tuneId;
   final String settingId;
   final bool isNewTune;
+  final List<dynamic>? likedSettings;
   const TuneInfoPage(
       {Key? key,
       required this.tuneId,
       required this.settingId,
-      required this.isNewTune})
+      required this.isNewTune,
+      this.likedSettings})
       : super(key: key);
 
   @override
@@ -59,10 +61,19 @@ class _TuneInfoPageState extends State<TuneInfoPage> {
             return TuneCard(
               post: post,
               showFooter: true,
+              isLiked: checkIfLiked(post.id),
             );
           },
           separatorBuilder: (context, index) => Divider(),
           itemCount: _posts.length),
     );
+  }
+
+  bool checkIfLiked(int settingId) {
+    if (widget.likedSettings != null && widget.likedSettings!.isNotEmpty) {
+      if (widget.likedSettings!.contains(settingId)) return true;
+      return false;
+    }
+    return false;
   }
 }

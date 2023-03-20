@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:thesession/widgets/explore/tune_display_card.dart';
+import 'package:thesession/widgets/explore/setting_display_card.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../../main.dart';

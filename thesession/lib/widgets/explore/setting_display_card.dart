@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:thesession/models/tunes/tuneInfo.dart';
+import 'package:thesession/utils/firestoreService.dart';
 import 'package:thesession/widgets/profile_icon.dart';
 import 'package:intl/intl.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -12,7 +13,8 @@ import '../../pages/Tunes/post_page.dart';
 class TuneCard extends StatefulWidget {
   final Post post;
   final bool? showFooter;
-  const TuneCard({Key? key, required this.post, this.showFooter})
+  bool? isLiked;
+  TuneCard({Key? key, required this.post, this.showFooter, this.isLiked})
       : super(key: key);
 
   @override
@@ -89,12 +91,6 @@ class _TuneCardState extends State<TuneCard> {
               ),
             ],
           ),
-          //Text(
-          //    widget.post.tuneInfo != null ? widget.post.tuneInfo!.name : 'Test'),
-          // Padding(
-          //   padding: const EdgeInsets.fromLTRB(15.0, 8, 8, 8),
-          //   child: Text(widget.post.abc),
-          // ),
           Padding(
               padding: const EdgeInsets.all(8.0),
               child: webView = TuneCard.getSheetMusic(widget.post)),
@@ -107,10 +103,8 @@ class _TuneCardState extends State<TuneCard> {
                   Text("See comments"),
                   Wrap(
                     children: [
-                      Icon(
-                        Icons.favorite_border,
-                        size: 28,
-                      ),
+                      GestureDetector(
+                          onTap: () => likePost(), child: getLikeIcon()),
                       SizedBox(
                         width: 2,
                       ),
@@ -128,6 +122,30 @@ class _TuneCardState extends State<TuneCard> {
     );
   }
 
+  Icon getLikeIcon() {
+    if (widget.isLiked != null && widget.isLiked!)
+      return Icon(
+        Icons.favorite,
+        size: 28,
+        color: Colors.red,
+      );
+    else
+      return Icon(
+        Icons.favorite_border,
+        size: 28,
+      );
+  }
+
+  void likePost() {
+    FireStoreService.likePost(widget.post.tuneInfo!.id, widget.post.id);
+    setState(() {
+      if (widget != null)
+        widget.isLiked = !widget.isLiked!;
+      else
+        widget.isLiked = true;
+    });
+  }
+
   void _navigateToPost(BuildContext context) {
     Post item = widget.post;
     Navigator.of(context).push(
@@ -138,5 +156,9 @@ class _TuneCardState extends State<TuneCard> {
         ),
       ),
     );
+  }
+
+  void _likePost() {
+    FireStoreService.likePost(widget.post.tuneInfo!.id, widget.post.id);
   }
 }

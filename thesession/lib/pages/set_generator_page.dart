@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:thesession/models/tunes/tuneInfo.dart';
 import 'package:thesession/widgets/explore/popular_tune_card.dart';
-import 'package:thesession/widgets/explore/tune_display_card.dart';
+import 'package:thesession/widgets/explore/setting_display_card.dart';
 import 'package:thesession/widgets/explore/tune_info_card.dart';
 import '../main.dart';
 import 'Tunes/tune_info_page.dart';
@@ -59,22 +59,23 @@ class _SetGeneratorPageState extends State<SetGeneratorPage> {
                 if (snapshot.hasData) {
                   return Expanded(
                     child: ListView.separated(
-                        itemBuilder: (context, index) {
-                          final tune = tunes[index];
-                          return GestureDetector(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: TuneInfoCard(tuneInfo: tune),
-                            ),
-                            onTap: () {
-                              _navigateToPost(context, index);
-                            },
-                          );
-                        },
-                        separatorBuilder: (context, index) => Divider(
-                              height: 1,
-                            ),
-                        itemCount: tunes.length),
+                      itemBuilder: (context, index) {
+                        final tune = tunes[index];
+                        return GestureDetector(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TuneInfoCard(tuneInfo: tune),
+                          ),
+                          onTap: () {
+                            _navigateToPost(context, index);
+                          },
+                        );
+                      },
+                      separatorBuilder: (context, index) => Divider(
+                        height: 1,
+                      ),
+                      itemCount: tunes.length,
+                    ),
                   );
                 } else {
                   return Container(
