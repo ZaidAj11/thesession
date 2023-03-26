@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:thesession/pages/bookmarks_page.dart';
 import 'package:thesession/pages/data_analytics/data_analytics_page.dart';
 import 'package:thesession/pages/likes_page.dart';
 import 'package:thesession/pages/set_generator_page.dart';
@@ -69,7 +70,8 @@ class SideDrawer extends StatelessWidget {
                               thickness: 0.5,
                             ),
                             DrawerItem(
-                              doSomething: () => _navigateToDataPage(context),
+                              doSomething: () =>
+                                  _navigateToBookmarksPage(context),
                               content: 'My Bookmarks',
                               trailingIcon: Icon(Icons.bookmark),
                             ),
@@ -117,6 +119,14 @@ class SideDrawer extends StatelessWidget {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => LikesPage(),
+      ),
+    );
+  }
+
+  void _navigateToBookmarksPage(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => BookmarksPage(),
       ),
     );
   }

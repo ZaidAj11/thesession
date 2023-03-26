@@ -44,6 +44,7 @@ class TuneCard extends StatefulWidget {
     fileHtmlContents = fileHtmlContents.replaceAll("<KEY>", key);
     fileHtmlContents = fileHtmlContents.replaceAll("<TYPE>", type);
     fileHtmlContents = fileHtmlContents.replaceAll("<ABC>", abc);
+    fileHtmlContents = fileHtmlContents.replaceAll("!", "\n");
     controller.loadUrl(Uri.dataFromString(fileHtmlContents,
             mimeType: 'text/html', encoding: Encoding.getByName('utf-8'))
         .toString());
@@ -55,6 +56,8 @@ class _TuneCardState extends State<TuneCard> {
   late WebViewController _controller;
   late Container webView;
   bool isLiked = false;
+  bool isBookmarked = false;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -105,24 +108,37 @@ class _TuneCardState extends State<TuneCard> {
                   Wrap(
                     children: [
                       GestureDetector(
-                          onTap: () => likePost(),
-                          child: FutureBuilder(
-                              future: FireStoreService.getLikedTunes(),
-                              builder: ((context, snapshot) {
-                                if (snapshot.hasData)
-                                  return getLikeIcon();
-                                else
-                                  return SizedBox(
-                                      height: 20,
-                                      width: 20,
-                                      child: CircularProgressIndicator());
-                              }))),
+                        onTap: () => likePost(),
+                        child: FutureBuilder(
+                          future: FireStoreService.getLikedTunes(),
+                          builder: ((context, snapshot) {
+                            if (snapshot.hasData)
+                              return getLikeIcon();
+                            else
+                              return SizedBox(
+                                  height: 20,
+                                  width: 20,
+                                  child: CircularProgressIndicator());
+                          }),
+                        ),
+                      ),
                       SizedBox(
                         width: 2,
                       ),
-                      Icon(
-                        Icons.bookmark_add_outlined,
-                        size: 28,
+                      GestureDetector(
+                        onTap: () => bookmarkPost(),
+                        child: FutureBuilder(
+                          future: FireStoreService.getBookmarkedTunes(),
+                          builder: ((context, snapshot) {
+                            if (snapshot.hasData)
+                              return getBookmarkIcon();
+                            else
+                              return SizedBox(
+                                  height: 20,
+                                  width: 20,
+                                  child: CircularProgressIndicator());
+                          }),
+                        ),
                       )
                     ],
                   )
@@ -151,10 +167,35 @@ class _TuneCardState extends State<TuneCard> {
       );
   }
 
+  Icon getBookmarkIcon() {
+    isLiked = FireStoreService.checkIfBookmarkedTune(
+        widget.post.tuneInfo!.id, widget.post.id);
+
+    if (isLiked)
+      return Icon(
+        Icons.bookmark,
+        size: 28,
+        color: Colors.orange,
+      );
+    else
+      return Icon(
+        Icons.bookmark_add_outlined,
+        size: 28,
+      );
+  }
+
   void likePost() async {
     await FireStoreService.likePost(widget.post.tuneInfo!.id, widget.post.id);
     setState(() {
       isLiked = !isLiked;
+    });
+  }
+
+  void bookmarkPost() async {
+    await FireStoreService.bookmarkPost(
+        widget.post.tuneInfo!.id, widget.post.id);
+    setState(() {
+      isBookmarked = !isBookmarked;
     });
   }
 
