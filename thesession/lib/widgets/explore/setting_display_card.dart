@@ -115,7 +115,7 @@ class _TuneCardState extends State<TuneCard> {
                                   return SizedBox(
                                       height: 20,
                                       width: 20,
-                                      child: LinearProgressIndicator());
+                                      child: CircularProgressIndicator());
                               }))),
                       SizedBox(
                         width: 2,

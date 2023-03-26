@@ -41,15 +41,20 @@ class FireStoreService {
 
       LikesMap[tuneId.toString()] = settingIds;
     }
+    removeTunesWithNoLikes();
     var docRef = _db.collection('users').doc(user!.uid);
     bool isReady = await docRef.get().then(
       (DocumentSnapshot doc) {
         final data = doc.data() as Map<String, dynamic>;
         data["likes"] = LikesMap;
-        docRef.set(data, SetOptions(merge: true));
+        docRef.set(data);
         return true;
       },
       onError: (e) => print("Error getting document: $e"),
     );
+  }
+
+  static void removeTunesWithNoLikes() {
+    LikesMap.removeWhere((key, value) => value.isEmpty);
   }
 }
