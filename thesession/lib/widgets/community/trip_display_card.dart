@@ -1,34 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:country_flags/country_flags.dart';
 import 'package:thesession/pages/community_pages/event_info_page.dart';
+import 'package:thesession/widgets/community/trip_details_card.dart';
 
 import '../../models/community/newEvent.dart';
+import '../../models/community/newTrip.dart';
 import '../../utils/countryCodeGenerator.dart';
 import '../../utils/objects.dart';
 import 'details_card.dart';
 
-class EventCard extends StatefulWidget {
-  final Event event;
-  final String address;
-  const EventCard({super.key, required this.event, required this.address});
-
+class TripCard extends StatefulWidget {
+  const TripCard({super.key, required this.trip});
+  final Trip trip;
   @override
-  State<EventCard> createState() => _EventCardState();
+  State<TripCard> createState() => _TripCardState();
 
-  static DetailsCard getDetailsCardForEvent(Event event) {
-    return DetailsCard(
-      where: event.url,
-      createdBy: event.member.name,
-      venue: event.venue.name,
-      area: event.area,
-      town: event.town,
-      country: event.country,
-      date: event.date,
+  static TripDetailsCard getDetailsCardForTrip(Trip trip) {
+    return TripDetailsCard(
+      where: trip.url,
+      createdBy: trip.member.name,
+      dateStart: trip.dtstart,
+      dateEnd: trip.dtend,
+      date: trip.date,
     );
   }
 }
 
-class _EventCardState extends State<EventCard> {
+class _TripCardState extends State<TripCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -49,7 +47,7 @@ class _EventCardState extends State<EventCard> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(8, 8, 0, 0),
                 child: CountryFlags.flag(
-                  getCountryCode(widget.event.country),
+                  getCountryCode(Area(name: 'Ireland')),
                   width: 64,
                   height: 48,
                   borderRadius: 12,
@@ -59,7 +57,7 @@ class _EventCardState extends State<EventCard> {
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(8.0, 8, 0, 0),
                   child: Text(
-                    widget.event.venue.name,
+                    widget.trip.name,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                   ),
@@ -69,7 +67,7 @@ class _EventCardState extends State<EventCard> {
           ),
           Padding(
             padding: EdgeInsets.fromLTRB(8, 8, 8, 0),
-            child: EventInfoPage.getDetailsCardForEvent(widget.event),
+            child: TripCard.getDetailsCardForTrip(widget.trip),
           ),
         ],
       ),

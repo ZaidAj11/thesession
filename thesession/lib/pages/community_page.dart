@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:thesession/pages/community_pages/session_new_page.dart';
+import 'package:thesession/pages/community_pages/trip_new_page.dart';
 import 'package:thesession/widgets/side_drawer.dart';
 
 import '../widgets/my_appbar.dart';
@@ -38,14 +39,17 @@ class _CommunityPageState extends State<CommunityPage> {
                   title: "New Sessions",
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 10,
                 ),
                 CommunitySection(
                   view: NewEventPage(),
                   title: "New Events",
                 ),
+                SizedBox(
+                  height: 10,
+                ),
                 CommunitySection(
-                  view: NewSessionPage(),
+                  view: NewTripsPage(),
                   title: "New Trips",
                 ),
               ],

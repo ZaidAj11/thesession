@@ -80,11 +80,13 @@ class _EventInfoPageState extends State<EventInfoPage> {
             const SizedBox(
               height: 15,
             ),
-            const Text(
-              "Details",
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: EventInfoPage.getDetailsCardForEvent(widget.event),
             ),
-            EventInfoPage.getDetailsCardForEvent(widget.event),
+            Divider(
+              thickness: 2,
+            ),
             const Text(
               "Comments",
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),

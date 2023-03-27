@@ -2,23 +2,19 @@ import 'package:flutter/material.dart';
 
 import '../../utils/objects.dart';
 
-class DetailsCard extends StatelessWidget {
+class TripDetailsCard extends StatelessWidget {
   final String where;
   final String createdBy;
-  final String venue;
-  final Area? area;
-  final Area? town;
-  final Area? country;
+  final DateTime dateStart;
+  final DateTime dateEnd;
   final DateTime date;
 
-  const DetailsCard(
+  const TripDetailsCard(
       {super.key,
       required this.where,
       required this.createdBy,
-      required this.venue,
-      required this.area,
-      required this.town,
-      required this.country,
+      required this.dateStart,
+      required this.dateEnd,
       required this.date});
 
   @override
@@ -26,6 +22,7 @@ class DetailsCard extends StatelessWidget {
     return Expanded(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -42,48 +39,42 @@ class DetailsCard extends StatelessWidget {
             ],
           ),
           SizedBox(
-            height: 2,
+            height: 5,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Venue: ",
+                "Date Start: ",
                 style: TextStyle(fontWeight: FontWeight.w500),
               ),
-              Align(
-                alignment: Alignment.centerRight,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text(
-                      venue,
-                      textAlign: TextAlign.right,
-                    ),
-                    Text(
-                      area?.name ?? '',
-                      textAlign: TextAlign.right,
-                    ),
-                    Text(
-                      town?.name ?? '',
-                      textAlign: TextAlign.right,
-                    ),
-                    Text(
-                      country?.name ?? '',
-                      textAlign: TextAlign.right,
-                    ),
-                  ],
-                ),
-              ),
+              Text(dateStart.toIso8601String().split('T')[0]),
             ],
+          ),
+          SizedBox(
+            height: 5,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "When: ",
+                "Date End: ",
+                style: TextStyle(fontWeight: FontWeight.w500),
+              ),
+              Text(dateEnd.toIso8601String().split('T')[0]),
+            ],
+          ),
+          SizedBox(
+            height: 5,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Posted: ",
                 style: TextStyle(fontWeight: FontWeight.w500),
               ),
               Text(date.toIso8601String().split('T')[0]),
