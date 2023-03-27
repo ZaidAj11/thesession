@@ -13,8 +13,14 @@ import '../../pages/Tunes/post_page.dart';
 class TuneCard extends StatefulWidget {
   final Post post;
   final bool? showFooter;
+  bool? ignorePadding;
   bool? isLiked;
-  TuneCard({Key? key, required this.post, this.showFooter, this.isLiked})
+  TuneCard(
+      {Key? key,
+      required this.post,
+      this.showFooter,
+      this.isLiked,
+      this.ignorePadding})
       : super(key: key);
 
   @override
@@ -71,7 +77,9 @@ class _TuneCardState extends State<TuneCard> {
                 child: Wrap(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(8, 8, 0, 0),
+                      padding: widget.ignorePadding != null
+                          ? EdgeInsets.all(0)
+                          : const EdgeInsets.fromLTRB(8, 8, 0, 0),
                       child: ProfileIcon(
                           username: widget.post.member.name.toString()),
                     ),
@@ -87,7 +95,9 @@ class _TuneCardState extends State<TuneCard> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.fromLTRB(0, 8, 8, 0),
+                padding: widget.ignorePadding != null
+                    ? EdgeInsets.all(0)
+                    : EdgeInsets.fromLTRB(0, 8, 8, 0),
                 child: Text(
                   formatter.format(widget.post.date).toString(),
                   style: TextStyle(fontSize: 14),
@@ -96,15 +106,25 @@ class _TuneCardState extends State<TuneCard> {
             ],
           ),
           Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: widget.ignorePadding != null
+                  ? EdgeInsets.fromLTRB(0, 8, 0, 8)
+                  : const EdgeInsets.all(8.0),
               child: webView = TuneCard.getSheetMusic(widget.post)),
           if (widget.showFooter != null && widget.showFooter!)
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: widget.ignorePadding != null
+                  ? EdgeInsets.all(0)
+                  : const EdgeInsets.all(8.0),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: widget.ignorePadding != null
+                    ? MainAxisAlignment.end
+                    : MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("See comments"),
+                  if (widget.ignorePadding == null)
+                    Text(
+                      "See comments",
+                      style: TextStyle(color: Colors.blue),
+                    ),
                   Wrap(
                     children: [
                       GestureDetector(
